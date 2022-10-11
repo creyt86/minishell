@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/11 16:49:06 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/11 18:57:40 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 # define ERR_EXE "execution error\n"
 # define ERR_TOKEN "syntax error near unexpected token\n"
 
+/* GLOBAL VARIABLE */
 int		g_exit_stat;
 
 // structure des listes chaînées afin de pouvoir stocker les arguments
@@ -111,6 +112,8 @@ typedef struct s_data
 	int					n_cmd;
 	t_input				*in;
 }	t_data;
+
+/* FUNCTIONS */
 
 //prompt.c
 void	prompt(char **envp);
