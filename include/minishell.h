@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/11 16:49:06 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/12 15:07:27 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,14 @@ typedef struct s_input
 	t_fd	fd;
 }	t_input;
 
-typedef struct s_data
+typedef struct s_shell
 {
 	char				**env;
 	int					n_env;
 	char				*path;
 	int					n_cmd;
 	t_input				*in;
-}	t_data;
+}	t_shell;
 
 //prompt.c
 void	prompt(char **envp);
@@ -162,7 +162,7 @@ void	print_env(t_data *dt, int in, char **elem);
 void	the_sorter(t_data *dt, char *tempura, char *a, char *b);
 void	dup_array_to_env(t_data *dt, char **array);
 
-//b_cd.c
+//cd.c
 int		b_cd(t_data *dt, int in);
 int		where_in_env(t_data *dt, char *key, int len);
 void	update_env(t_data *dt, char *dir);
