@@ -6,11 +6,11 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:05:52 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/12 15:07:31 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/13 16:20:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 int	b_echo(t_shell *sh, int in)
 {

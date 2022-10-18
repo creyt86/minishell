@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:10:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/12 15:11:57 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/13 14:40:33 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**dup_env(t_shell *sh)
 	char	**export;
 
 	export = malloc(sizeof(char *) * sh->n_env);
-	malloc_checker((char *)export);
+	protect_malloc((char *)export);
 	i = 0;
 	while (i < sh->n_env)
 	{
@@ -90,7 +90,7 @@ void	dup_array_to_env(t_shell *sh, char **array)
 	int	i;
 
 	sh->env = malloc (sizeof(char *) * (sh->n_env + 1));
-	malloc_checker((char *)sh->env);
+	protect_malloc((char *)sh->env);
 	i = -1;
 	while (++i < sh->n_env)
 		sh->env[i] = array[i];

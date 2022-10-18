@@ -12,10 +12,11 @@ CYAN = \033[36m
 
 NAME = minishell
 
-SRCS 	=
+MAIN	= srcs/minishell.c
+
+SRCS = srcs/builtins/b_builtins.c srcs/builtins/b_echo.c srcs/builtins/b_env_utils.c srcs/builtins/b_cd.c srcs/builtins/b_export.c srcs/builtins/b_init.c srcs/builtins/b_unset.c srcs/minishell.c
 
 OBJS 	= ${SRCS:.c=.o}
-MAIN	= srcs/minishell.c
 
 HEADER	= -Iinclude
 

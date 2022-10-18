@@ -6,15 +6,15 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:27:30 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/12 15:07:48 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/13 16:19:29 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
-int b_cd(t_shell *sh, int in)
+int	b_cd(t_shell *sh, int in)
 {
-    char	dir[MAX_PATH];
+	char	dir[MAX_PATH];
 	int		i;
 
 	if (sh->in[in].n_elem == 1)
@@ -36,6 +36,7 @@ int b_cd(t_shell *sh, int in)
 	update_env(sh, dir);
 	return (the_end(NULL, EXIT_SUCCESS, 0));
 }
+
 void	update_env(t_shell *sh, char *dir)
 {
 	int		i;

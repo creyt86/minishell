@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/12 15:07:27 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/13 16:41:27 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,128 +112,128 @@ typedef struct s_shell
 	t_input				*in;
 }	t_shell;
 
-//prompt.c
+//prompt.c - Verena
 void	prompt(char **envp);
-int		termios_line(t_data *dt);
-void	the_closer(t_data *dt);
-void	prompt_quotes(t_data *dt);
-void	ft_wait(t_data *dt, int i);
+int		termios_line(t_shell *sh);
+void	the_closer(t_shell *sh);
+void	prompt_quotes(t_shell *sh);
+void	ft_wait(t_shell *sh, int i);
 
-//builtins.c
-int		b_pwd(t_data *dt);
-int		b_exit(t_data *dt, int in);
-int		b_env(t_data *dt);
-void	free_all(t_data *dt);
+//builtins.c - Claire - OK
+int		b_env(t_shell *sh);
+int		b_exit(t_shell *sh, int in);
+int		b_pwd(t_shell *sh);
+void	free_all(t_shell *sh);
 
-//cmd_selector.c
-void	cmd_selector(t_data *dt, int i);
-int		builtins_selector(t_data *dt, int i);
-void	bs_fd(t_data *dt, int i, t_fd *fdk);
-int		is_bs(t_data *dt, int i);
+//cmd_selector.c - Claire - OK
+void	cmd_selector(t_shell *sh, int i);
+int		builtins_selector(t_shell *sh, int i);
+void	bs_fd(t_shell *sh, int i, t_fd *fid);
+int		is_bs(t_shell *sh, int i);
 char	*ft_strtolower(char *s);
 
-//parsing.c
-int		parsing_init(char *args, t_data *dt);
+//parsing.c - Verena
+int		parsing_init(char *args, t_shell *sh);
 int		each_elem(t_input *in, char *s, int i, int n);
-void	parsing_elem(t_data *dt, char *s, int in);
-int		parsing_misc(t_data *dt, int i, char **input);
+void	parsing_elem(t_shell *sh, char *s, int in);
+int		parsing_misc(t_shell *sh, int i, char **input);
 
-//parsing_utils.c
+//parsing_utils.c- Verena
 int		check_quotes(t_input *input, char *s);
 int		skip_spaces(char *s, int i);
 void	space_counter(t_input *input, char *s);
 int		skip_quotes(t_input *in, int i);
 int		skip_n(t_input *in, int i);
 
-//parsing_elem_utils.c
+//parsing_elem_utils.c - Verena
 int		malloc_elem(t_input *in, char *s, int i, int n);
 int		into_elem_quotes(t_input *in, char *s, int i, int n);
-int		nb_cmd(t_data *dt, char *args, int i);
+int		nb_cmd(t_shell *sh, char *args, int i);
 
-//quotes_mgmt.c
-int		d_quotes_mgmt(t_input *input, char *s, int i, int n);
-int		s_quotes_mgmt(t_input *input, char *s, int i, int n);
-int		no_quote_mgmt(t_input *input, char *s, int i, int n);
+//quotes.c - Claire OK
+int		double_quotes(t_input *input, char *s, int i, int n);
+int		simple_quotes(t_input *input, char *s, int i, int n);
+int		no_quote(t_input *input, char *s, int i, int n);
 
-//env_utils.c
+//env_utils.c - Claire - OK
+void	print_env(t_shell *sh, int in, char **elem);
 char	**parse_env(char *s);
-void	sort_env(t_data *dt, int in);
-void	print_env(t_data *dt, int in, char **elem);
-void	the_sorter(t_data *dt, char *tempura, char *a, char *b);
-void	dup_array_to_env(t_data *dt, char **array);
+void	sort_env(t_shell *sh, int in);
+void	dup_array_to_env(t_shell *sh, char **array);
 
-//cd.c
-int		b_cd(t_data *dt, int in);
-int		where_in_env(t_data *dt, char *key, int len);
-void	update_env(t_data *dt, char *dir);
+//cd.c - Claire - OK
+int		b_cd(t_shell *sh, int in);
+int		where_in_env(t_shell *sh, char *key, int len);
+void	update_env(t_shell *sh, char *dir);
 int		print_cd(char *s, int n);
-int		no_place_like_home(t_data *dt);
+int		no_place_like_home(t_shell *sh);
 
-//b_export.c
-int		b_export(t_data *dt, int in);
-void	add_key(t_data *dt, char *key, char *val);
+//b_export.c - Claire - OK
+int		b_export(t_shell *sh, int in);
+void	add_key(t_shell *sh, char *key, char *val);
 char	*define_val(char *key, char *val);
-void	update_arr(t_data *dt, char **new_array, int add_key, char *new_val);
-void	update_key(t_data *dt, char *key, char *val, char **new_array);
+void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val);
+void	update_key(t_shell *sh, char *key, char *val, char **new_array);
 
-//b_unset.c
-int		b_unset(t_data *dt, int in);
-void	remove_key(t_data *dt, char *key);
+//b_unset.c - Claire - OK
+int		b_unset(t_shell *sh, int in);
+void	remove_key(t_shell *sh, char *key);
 
-//b_echo.c
-int		b_echo(t_data *dt, int in);
+//b_echo.c - Claire - OK
+int		b_echo(t_shell *sh, int in);
 void	print_echo_n(t_input *in, int i);
 
-//b_init.c
-void	b_init(t_data *dt, char *envp[]);
-void	malloc_checker(char *s);
+//b_init.c - Claire - OK
+void	b_init(t_shell *sh, char *envp[]);
+void	protect_malloc(char *s);
 void	freearray(char **m, int n);
 
-//var.c
-void	conv_var(t_data *dt, int in, int i);
+//var.c - Verena
+void	conv_var(t_shell *sh, int in, int i);
 char	*check_doll(t_input *in, int j, char *tmp, int i);
 
-//quotes_utils.c
-int		trimquotes(t_data *dt, char *s, int in, int i);
+//quotes_utils.c - Claire
+int		trimquotes(t_shell *sh, char *s, int in, int i);
 
-//redir_utils.c
-int		count_redir(t_data *dt, int in);
-void	init_redir(t_data *dt, int in);
-int		pop_redir(t_data *dt, int in, int i);
-int		checker_redir(t_data *dt, int in, int i);
+//redir_utils.c - Nous
+int		count_redir(t_shell *sh, int in);
+void	init_redir(t_shell *sh, int in);
+int		pop_redir(t_shell *sh, int in, int i);
+int		checker_redir(t_shell *sh, int in, int i);
 
-//redir.c
-void	exec_redir(t_data *dt);
-void	redir_output(t_data *dt, int i, int j);
-void	redir_input(t_data *dt, int i, int j);
-void	append_in(t_data *dt, int i, int j);
-void	heredoc(t_data *dt, int i, int j);
+//redir.c - Nous
+void	exec_redir(t_shell *sh);
+void	redir_output(t_shell *sh, int i, int j);
+void	redir_input(t_shell *sh, int i, int j);
+void	append_in(t_shell *sh, int i, int j);
+void	heredoc(t_shell *sh, int i, int j);
 
-//redir_again.c
-void	mgmnt_fd(t_data *dt);
-void	open_fd(t_data *dt, int i, int j);
-void	init_fd(t_data *dt);
+//redir_again.c - Nous
+void	mgmnt_fd(t_shell *sh);
+void	open_fd(t_shell *sh, int i, int j);
+void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
 
-//execve.c
-void	exec_boarders(t_data *dt, int in);
-int		exec_middle(t_data *dt, int in, int ok, int i);
-int		on_my_way(t_data *dt, int ok, char *cmd_path, int in);
-void	execution(t_data *dt, int in, int i, int ok);
+//execve.c - Verena
+void	exec_boarders(t_shell *sh, int in);
+int		exec_middle(t_shell *sh, int in, int ok, int i);
+int		on_my_way(t_shell *sh, int ok, char *cmd_path, int in);
+void	execution(t_shell *sh, int in, int i, int ok);
 int		len_array(char **array);
 
-//signals.c
+//signals.c - Nous
 void	sig_int(int c);
 void	sig_double(int c);
 char	*ft_set_signal(void);
 
-//error.c
-int		the_end(char *msg, int status, int print);
-int		msg_cmd_404(t_data *dt, int i);
+//error.c - Verena
 
-//free.c
-void	free_data(t_data *dt);
-void	free_redir(t_data *dt, int i);
+int		the_end(char *msg, int status, int print);
+int		msg_cmd_404(t_shell *sh, int i);
+
+//free.c - Claire
+void	free_shell(t_shell *sh);
+void	free_redir(t_shell *sh, int i);
 
 //ft_split_exception_utils.c
 int		check_qts_split(char *s, int i, char c);
