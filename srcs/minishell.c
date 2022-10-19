@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/13 11:52:11 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:03:54 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,20 @@ int	main(void)
 		readline(0);
 	}
 	return (0);
+}
+
+int	main(int argc, char *argv[], char **envp)
+{
+	(void)argv;
+	(void)envp;
+	if (argc > 1)
+	{
+		ft_printf("\033[31mARG_ERROR\n\033[31m");
+		return (1);
+	}
+	if (envp)
+	{
+		welcome_in_our_prompt();
+		prompt(envp);
+	}
 }
