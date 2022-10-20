@@ -15,6 +15,10 @@ NAME = minishell
 SRCS 	= srcs/minishell.c srcs/prompt/prompt.c srcs/prompt/safe_word.c srcs/prompt/path.c srcs/prompt/redir.c \
 		  srcs/parsing/parsing.c srcs/parsing/signals.c srcs/parsing/dollar.c srcs/parsing/execve.c \
 		  utils/for_parsing.c utils/elem_for_parsing.c utils/for_redir.c\
+		  srcs/parsing/for_parsing.c srcs/parsing/elem_for_parsing.c srcs/builtins/b_builtins.c \
+		  utils/ft_split_exception.c srcs/builtins/b_echo.c srcs/builtins/b_env_utils.c \
+		  srcs/builtins/b_cd.c srcs/builtins/b_export.c utils/ft_strjoin_free.c\
+		  srcs/builtins/b_init.c srcs/builtins/b_unset.c srcs/minishell.c \
 
 OBJS 	= ${SRCS:.c=.o}
 MAIN	= srcs/minishell.c srcs/
