@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elem_for_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 10:24:31 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 11:34:47 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:52:27 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	malloc_elem(t_input *in, char *s, int i, int n)
 		}
 	}
 	in->elem->cont[n] = malloc(sizeof(char) * (j + 2));
-	malloc_checker(in->elem->cont[n]);
+	protect_malloc(in->elem->cont[n]);
 	return (j);
 }
 
