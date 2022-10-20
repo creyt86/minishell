@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 10:43:37 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:44:52 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void	b_init(t_shell *sh, char *envp[]);
 void	malloc_checker(char *s);
 void	freearray(char **m, int n);
 
-//var.c - Verena
+//var.c - Verena - OK
 void	conv_var(t_shell *sh, int in, int i);
 char	*find_dollar(t_input *in, int j, char *tmp, int i);
 
@@ -215,7 +215,7 @@ void	open_fd(t_shell *sh, int i, int j);
 void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
 
-//execve.c - Verena
+//execve.c - Verena 
 void	exec_boarders(t_shell *sh, int in);
 int		exec_middle(t_shell *sh, int in, int ok, int i);
 int		on_my_way(t_shell *sh, int ok, char *cmd_path, int in);
