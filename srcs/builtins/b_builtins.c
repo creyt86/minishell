@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:33:11 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 16:20:32 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/20 09:20:00 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ int	b_pwd(t_shell *sh)
 void	free_all(t_shell *sh)
 {
 	freearray(sh->env, sh->n_env);
-	free_data(sh);
+	free_shell(sh);
 }
