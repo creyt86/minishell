@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 09:53:39 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 11:31:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	prompt_quotes(t_shell *sh)
 			trimquotes(sh, "\"", i, j);
 			quote = trimquotes(sh, "\'", i, j);
 			if (!quote)
-				conv_var(sh, i, j);
+				ft_dollar(sh, i, j);
 			if (checker_redir(sh, i, j) == NO_RESULT)
 				break ;
 			if (sh->in[i].n_redir > 0)

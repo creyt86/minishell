@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/19 13:03:54 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 11:34:11 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 void	welcome_in_our_prompt(void)
 {
@@ -31,18 +26,6 @@ void	welcome_in_our_prompt(void)
 	ft_printf ("%s\n", b);
 	ft_printf ("%s\n", c);
 	ft_printf ("\n");
-}
-
-int	main(void)
-{
-	welcome_in_our_prompt();
-	while (42)
-	{
-		ft_printf("minishell-2.0$ ");
-		//ft_no_one("test");
-		readline(0);
-	}
-	return (0);
 }
 
 int	main(int argc, char *argv[], char **envp)

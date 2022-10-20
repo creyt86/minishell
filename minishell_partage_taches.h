@@ -6,15 +6,15 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 10:44:52 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 11:33:20 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../utils/libft/libft.h"
-# include "../utils/ft_printf/ft_printf.h"
+# include "./utils/libft/libft.h"
+# include "./utils/ft_printf/ft_printf.h"
 
 # include <unistd.h>
 # include <stdio.h>
