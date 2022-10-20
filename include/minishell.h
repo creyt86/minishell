@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 14:11:12 by vferraro         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -190,7 +179,7 @@ void	print_echo_n(t_input *in, int i);
 
 //b_init.c
 void	b_init(t_shell *sh, char *envp[]);
-void	malloc_checker(char *s);
+void	protect_malloc(char *s);
 void	freearray(char **m, int n);
 
 //dollar.c
@@ -241,5 +230,10 @@ void	free_redir(t_shell *sh, int i);
 
 //ft_split_exception_utils.c
 int		check_qts_split(char *s, int i, char c);
+char	**ft_split_ex(char const *s, char c);
+int		is_quotes(char *s, int i);
+
+//ft_strjoin_free.c
+char	*ft_strjoin_free(char const *s1, char const *s2);
 
 #endif
