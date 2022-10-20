@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:27:30 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 16:19:29 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/20 13:53:18 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	no_place_like_home(t_shell *sh)
 
 	i = where_in_env(sh, "HOME", 5);
 	if (i == NO_RESULT)
-		the_end(HOMELESS, EXIT_FAILURE, 1);
+		the_end(HOME_SET, EXIT_FAILURE, 1);
 	else
 	{
 		tmp = parse_env(sh->env[i]);

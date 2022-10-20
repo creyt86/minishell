@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:00:11 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 10:28:27 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:52:27 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ int	parsing_misc(t_shell *sh, int i, char **input)
 		sh->in[i].n_elem = 1;
 		count_spaces(&sh->in[i], sh->in[i].cont);
 		sh->in[i].elem = malloc(sizeof(t_elem));
-		malloc_checker((char *)sh->in[i].elem);
+		protect_malloc((char *)sh->in[i].elem);
 		sh->in[i].elem->cont = malloc(sizeof(char *)
 				* (sh->in[i].n_elem + 1));
-		malloc_checker((char *)sh->in[i].elem->cont);
+		protect_malloc((char *)sh->in[i].elem->cont);
 		parsing_elem(sh, sh->in[i].cont, i);
 	}
 	return (0);

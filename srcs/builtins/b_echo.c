@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:05:52 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 16:20:36 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/20 13:50:47 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	b_echo(t_shell *sh, int in)
 
 void	print_echo_n(t_input *in, int i)
 {
-	i = skip_n(in, i);
+	i = avoid_n(in, i);
 	while (i < in->n_elem)
 	{
 		if (ft_strncmp(in->elem->cont[i], "\0", 1))

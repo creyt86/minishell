@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_partage_taches.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 11:33:20 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:52:27 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void	print_echo_n(t_input *in, int i);
 
 //b_init.c - Claire
 void	b_init(t_shell *sh, char *envp[]);
-void	malloc_checker(char *s);
+void	protect_malloc(char *s);
 void	freearray(char **m, int n);
 
 //var.c - Verena - OK
@@ -215,7 +215,7 @@ void	open_fd(t_shell *sh, int i, int j);
 void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
 
-//execve.c - Verena 
+//execve.c - Verena
 void	exec_boarders(t_shell *sh, int in);
 int		exec_middle(t_shell *sh, int in, int ok, int i);
 int		on_my_way(t_shell *sh, int ok, char *cmd_path, int in);
