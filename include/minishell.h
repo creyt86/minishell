@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 10:43:37 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:11:12 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 # define NOT_CLOSE "Quotes are not closed\n"
 # define NOT_NUM "numeric argument required\n"
 # define ERR_MALL "malloc error\n"
-# define ERR_RDIR "redirection error\n"
+# define ERR_RDIR "redirection error\n" // etait ERR_CHEVRON
 # define ERR_PIPE "pipe error\n"
 # define ERR_FILE "file error\n"
 # define ERR_EXE "execution error\n"
