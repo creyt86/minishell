@@ -12,7 +12,7 @@ CYAN = \033[36m
 
 NAME = minishell
 
-SRCS 	= srcs/minishell.c
+SRCS 	= srcs/minishell.c srcs/prompt/prompt.c srcs/prompt/safe_word.c
 
 OBJS 	= ${SRCS:.c=.o}
 MAIN	= srcs/minishell.c

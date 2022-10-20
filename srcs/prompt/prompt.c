@@ -6,72 +6,21 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/09/22 14:59:42 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:05:04 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-/* TEST */
-// int main()
-// {
-// 	char    buffer[50];
-
-// 	printf("\nInterpreteur de commande\nTaper \"exit\" pour quitter\n");
-// 	while(1)
-// 	{
-// 		printf("Prompt : ");
-// 		scanf("%s",buffer);
-// 		if (strcmp("exit",buffer)==0)
-// 		{
-// 			exit(0);
-// 		}
-// 		else
-// 		{
-// 			printf("Commande inconnue ...\n");
-// 		}
-// 	}
-// }
-
-/* CLAIRE */
-// while (42)
-// 		{
-// 			ft_init_struct(&data);
-// 			data.str_rl = readline("$ ");
-// 			if (!data.str_rl)
-// 				break ;
-// 			ft_infinity_while(&data);
-// 		}
-// //En gros, il enregistre le $, chez toi c'est "prompt" dans une variable
-// if (argc == 1)
-// 	{
-// 		while (1)
-// 		{
-// 			ft_init_struct(&data);
-// 			data.str_rl = readline("$ ");
-// 			if (!data.str_rl)
-// 				break ;
-// 			ft_infinity_while(&data);
-// 		}
-// 		tcsetattr(STDIN_FILENO, TCSANOW, &sig);
-// 	}
-// 	else
-// 		printf("Error argument\n");
 
 void	welcome_in_our_prompt(void)
 {
 	char	*a;
 	char	*b;
 	char	*c;
-	
-	a = " (|)_(|)";
-	b = " (='.'=)     */ welcome in our prompt \\*";
-	c = "('')-('')           V + C = 💛";
+
+	a = " (|)_(|)                                       (|)_(|)";
+	b = " (='.'=)      */ welcome in our prompt \\*      (='.'=)";
+	c = "('')-('')                                     ('')-('')";
 	ft_printf ("\n");
 	ft_printf ("%s\n", a);
 	ft_printf ("%s\n", b);
@@ -79,18 +28,14 @@ void	welcome_in_our_prompt(void)
 	ft_printf ("\n");
 }
 
-int	main(void)
+int	open_prompt(void)
 {
-/*
-  ETAPE 1 PROMPT
-  faisons le simple principe d’afficher un prompt qui lit des
-  commandes et fait rien (pour l’instant) sortir avec ctrl + c.
-*/
 	welcome_in_our_prompt();
 	while (42)
 	{
-		ft_putstr_fd("$ ", 1);
-		ft_no_one("test");
+		ft_putstr_fd("minishell-2.0$ ", 1);
+		//ft_printf("minishell-2.0$ ");
+		//ft_exit_word("bye\n", EXIT_SUCCESS, 1);
 		readline(0);
 	}
 	return (0);
