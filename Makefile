@@ -12,10 +12,12 @@ CYAN = \033[36m
 
 NAME = minishell
 
-SRCS 	=
+SRCS 	= srcs/minishell.c srcs/prompt/prompt.c srcs/prompt/safe_word.c srcs/prompt/path.c \
+		  srcs/parsing/parsing.c srcs/parsing/signals.c srcs/parsing/dollar.c srcs/parsing/execve.c \
+		  srcs/utils/for_parsing.c srcs/utils/elem_for_parsing.c \
 
 OBJS 	= ${SRCS:.c=.o}
-MAIN	= srcs/minishell.c
+MAIN	= srcs/minishell.c srcs/
 
 HEADER	= -Iinclude
 
