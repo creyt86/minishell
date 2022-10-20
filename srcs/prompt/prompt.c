@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/19 13:11:47 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 09:53:39 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,46 @@
 
 void	prompt(char **envp)
 {
-	t_data	data;
+	t_shell	sh;
 	int		i;
 
 	g_exit_stat = 0;
-	b_init(&data, envp);
+	b_init(&sh, envp);
 	while (42)
 	{
-		if (ft_new_prompt(&data) == 1)
+		if (ft_new_prompt(&sh) == 1)
 			continue ;
-		prompt_quotes(&data);
+		prompt_quotes(&sh);
 		i = 0;
-		exec_redir(&data);
-		while (i < data.n_cmd)
+		exec_redir(&sh);
+		while (i < sh.n_cmd)
 		{
-			cmd_selector(&data, i);
+			cmd_selector(&sh, i);
 			i++;
 		}
-		ft_close(&data);
+		ft_close(&sh);
 		i = 0;
-		ft_wait(&data, i);
-		free_data(&data);
+		ft_wait(&sh, i);
+		free_sh(&sh);
 	}
 }
 
-void	ft_close(t_data *data)
+void	ft_close(t_shell *sh)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->n_cmd)
+	while (i < sh->n_cmd)
 	{
-		if (data->in[i].fd.out > 2)
-			close(data->in[i].fd.out);
-		if (data->in[i].fd.in > 2)
-			close(data->in[i].fd.in);
+		if (sh->in[i].fd.out > 2)
+			close(sh->in[i].fd.out);
+		if (sh->in[i].fd.in > 2)
+			close(sh->in[i].fd.in);
 		i++;
 	}
 }
 
-int	ft_new_prompt(t_data *data)
+int	ft_new_prompt(t_shell *sh)
 {
 	char			*prompt;
 	char			*new_prompt;
@@ -64,10 +64,10 @@ int	ft_new_prompt(t_data *data)
 	free(prompt);
 	if (!new_prompt)
 	{
-		freearray(data->env, data->n_env);
+		freearray(sh->env, sh->n_env);
 		exit(the_end("exit\n", EXIT_SUCCESS, 1));
 	}
-	if (!new_prompt[0] || parsing_init(new_prompt, data) == NO_RESULT)
+	if (!new_prompt[0] || parsing_init(new_prompt, sh) == NO_RESULT)
 	{
 		free(new_prompt);
 		return (1);
@@ -77,42 +77,42 @@ int	ft_new_prompt(t_data *data)
 	return (0);
 }
 
-void	prompt_quotes(t_data *data)
+void	prompt_quotes(t_shell *sh)
 {
 	int	i;
 	int	j;
 	int	quote;
 
 	i = 0;
-	while (i < data->n_cmd)
+	while (i < sh->n_cmd)
 	{
 		j = 0;
-		init_redir(data, i);
-		while (j < data->in[i].n_elem)
+		init_redir(sh, i);
+		while (j < sh->in[i].n_elem)
 		{
-			trimquotes(data, "\"", i, j);
-			quote = trimquotes(data, "\'", i, j);
+			trimquotes(sh, "\"", i, j);
+			quote = trimquotes(sh, "\'", i, j);
 			if (!quote)
-				conv_var(data, i, j);
-			if (checker_redir(data, i, j) == NO_RESULT)
+				conv_var(sh, i, j);
+			if (checker_redir(sh, i, j) == NO_RESULT)
 				break ;
-			if (data->in[i].n_redir > 0)
+			if (sh->in[i].n_redir > 0)
 				j--;
 			j++;
 		}
-		if (data->in[i].pos_red == NO_RESULT)
+		if (sh->in[i].pos_red == NO_RESULT)
 			break ;
 		i++;
 	}
 }
 
-void	ft_wait(t_data *data, int i)
+void	ft_wait(t_shell *sh, int i)
 {
-	while (i < data->n_cmd)
+	while (i < sh->n_cmd)
 	{
-		if (data->in[i].pid != NO_RESULT)
+		if (sh->in[i].pid != NO_RESULT)
 		{
-			waitpid(data->in[i].pid, &g_exit_stat, 0);
+			waitpid(sh->in[i].pid, &g_exit_stat, 0);
 			if (WIFSIGNALED(g_exit_stat))
 				g_exit_stat = ERR_SIGN + g_exit_stat;
 			if (WIFEXITED(g_exit_stat))

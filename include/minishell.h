@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/19 17:02:54 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:03:10 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,43 +104,43 @@ typedef struct s_input
 	t_fd	fd;
 }	t_input;
 
-typedef struct s_data
+typedef struct s_shell
 {
 	char				**env;
 	int					n_env;
 	char				*path;
 	int					n_cmd;
 	t_input				*in;
-}	t_data;
+}	t_shell;
 
 /* FUNCTIONS */
 
 //prompt.c
 void	prompt(char **envp);
 void	welcome_in_our_prompt(void); //ma fonction pour faire joli lol
-int		ft_new_prompt(t_data *data);
-void	ft_close(t_data *data);
-void	prompt_quotes(t_data *data);
-void	ft_wait(t_data *data, int i);
+int		ft_new_prompt(t_shell *sh);
+void	ft_close(t_shell *sh);
+void	prompt_quotes(t_shell *sh);
+void	ft_wait(t_shell *sh, int i);
 
 //builtins.c
-int		b_pwd(t_data *data);
-int		b_exit(t_data *data, int in);
-int		b_env(t_data *data);
-void	free_all(t_data *data);
+int		b_pwd(t_shell *sh);
+int		b_exit(t_shell *sh, int in);
+int		b_env(t_shell *sh);
+void	free_all(t_shell *sh);
 
 //cmd_selector.c
-void	cmd_selector(t_data *data, int i);
-int		builtins_selector(t_data *data, int i);
-void	bs_fd(t_data *data, int i, t_fd *fdk);
-int		is_bs(t_data *data, int i);
+void	cmd_selector(t_shell *sh, int i);
+int		builtins_selector(t_shell *sh, int i);
+void	bs_fd(t_shell *sh, int i, t_fd *fdk);
+int		is_bs(t_shell *sh, int i);
 char	*ft_strtolower(char *s);
 
 //parsing.c
-int		parsing_init(char *args, t_data *data);
+int		parsing_init(char *args, t_shell *sh);
 int		each_elem(t_input *in, char *s, int i, int n);
-void	parsing_elem(t_data *data, char *s, int in);
-int		parsing_misc(t_data *data, int i, char **input);
+void	parsing_elem(t_shell *sh, char *s, int in);
+int		parsing_misc(t_shell *sh, int i, char **input);
 
 //parsing_utils.c
 int		check_quotes(t_input *input, char *s);
@@ -152,7 +152,7 @@ int		avoid_n(t_input *in, int i);
 //parsing_elem_utils.c
 int		malloc_elem(t_input *in, char *s, int i, int n);
 int		into_elem_quotes(t_input *in, char *s, int i, int n);
-int		nb_cmd(t_data *data, char *args, int i);
+int		nb_cmd(t_shell *sh, char *args, int i);
 
 //quotes_mgmt.c
 int		d_quotes_mgmt(t_input *input, char *s, int i, int n);
@@ -161,69 +161,69 @@ int		no_quote_mgmt(t_input *input, char *s, int i, int n);
 
 //env_utils.c
 char	**parse_env(char *s);
-void	sort_env(t_data *data, int in);
-void	print_env(t_data *data, int in, char **elem);
-void	the_sorter(t_data *data, char *tempura, char *a, char *b);
-void	dup_array_to_env(t_data *data, char **array);
+void	sort_env(t_shell *sh, int in);
+void	print_env(t_shell *sh, int in, char **elem);
+void	the_sorter(t_shell *sh, char *tempura, char *a, char *b);
+void	dup_array_to_env(t_shell *sh, char **array);
 
 //b_cd.c
-int		b_cd(t_data *data, int in);
-int		where_in_env(t_data *data, char *key, int len);
-void	update_env(t_data *data, char *dir);
+int		b_cd(t_shell *sh, int in);
+int		where_in_env(t_shell *sh, char *key, int len);
+void	update_env(t_shell *sh, char *dir);
 int		print_cd(char *s, int n);
-int		no_place_like_home(t_data *data);
+int		no_place_like_home(t_shell *sh);
 
 //b_export.c
-int		b_export(t_data *data, int in);
-void	add_key(t_data *data, char *key, char *val);
+int		b_export(t_shell *sh, int in);
+void	add_key(t_shell *sh, char *key, char *val);
 char	*define_val(char *key, char *val);
-void	update_arr(t_data *data, char **new_array, int add_key, char *new_val);
-void	update_key(t_data *data, char *key, char *val, char **new_array);
+void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val);
+void	update_key(t_shell *sh, char *key, char *val, char **new_array);
 
 //b_unset.c
-int		b_unset(t_data *data, int in);
-void	remove_key(t_data *data, char *key);
+int		b_unset(t_shell *sh, int in);
+void	remove_key(t_shell *sh, char *key);
 
 //b_echo.c
-int		b_echo(t_data *data, int in);
+int		b_echo(t_shell *sh, int in);
 void	print_echo_n(t_input *in, int i);
 
 //b_init.c
-void	b_init(t_data *data, char *envp[]);
+void	b_init(t_shell *sh, char *envp[]);
 void	malloc_checker(char *s);
 void	freearray(char **m, int n);
 
 //var.c
-void	conv_var(t_data *data, int in, int i);
+void	conv_var(t_shell *sh, int in, int i);
 char	*check_doll(t_input *in, int j, char *tmp, int i);
 
 //quotes_utils.c
-int		trimquotes(t_data *data, char *s, int in, int i);
+int		trimquotes(t_shell *sh, char *s, int in, int i);
 
 //redir_utils.c
-int		count_redir(t_data *data, int in);
-void	init_redir(t_data *data, int in);
-int		pop_redir(t_data *data, int in, int i);
-int		checker_redir(t_data *data, int in, int i);
+int		count_redir(t_shell *sh, int in);
+void	init_redir(t_shell *sh, int in);
+int		pop_redir(t_shell *sh, int in, int i);
+int		checker_redir(t_shell *sh, int in, int i);
 
 //redir.c
-void	exec_redir(t_data *data);
-void	redir_output(t_data *data, int i, int j);
-void	redir_input(t_data *data, int i, int j);
-void	append_in(t_data *data, int i, int j);
-void	heredoc(t_data *data, int i, int j);
+void	exec_redir(t_shell *sh);
+void	redir_output(t_shell *sh, int i, int j);
+void	redir_input(t_shell *sh, int i, int j);
+void	append_in(t_shell *sh, int i, int j);
+void	heredoc(t_shell *sh, int i, int j);
 
 //redir_again.c
-void	mgmnt_fd(t_data *data);
-void	open_fd(t_data *data, int i, int j);
-void	init_fd(t_data *data);
+void	mgmnt_fd(t_shell *sh);
+void	open_fd(t_shell *sh, int i, int j);
+void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
 
 //execve.c
-void	exec_boarders(t_data *data, int in);
-int		exec_middle(t_data *data, int in, int ok, int i);
-int		on_my_way(t_data *data, int ok, char *cmd_path, int in);
-void	execution(t_data *data, int in, int i, int ok);
+void	exec_boarders(t_shell *sh, int in);
+int		exec_middle(t_shell *sh, int in, int ok, int i);
+int		on_my_way(t_shell *sh, int ok, char *cmd_path, int in);
+void	execution(t_shell *sh, int in, int i, int ok);
 int		len_array(char **array);
 
 //signals.c
@@ -233,11 +233,11 @@ char	*ft_set_signal(void);
 
 //error.c
 int		the_end(char *msg, int status, int print);
-int		msg_cmd_404(t_data *data, int i);
+int		msg_cmd_404(t_shell *sh, int i);
 
 //free.c
-void	free_data(t_data *data);
-void	free_redir(t_data *data, int i);
+void	free_sh(t_shell *sh);
+void	free_redir(t_shell *sh, int i);
 
 //ft_split_exception_utils.c
 int		check_qts_split(char *s, int i, char c);

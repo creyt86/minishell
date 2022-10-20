@@ -6,49 +6,49 @@
 /*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:00:11 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/19 17:02:54 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 09:53:39 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	parsing_init(char *args, t_data *data)
+int	parsing_init(char *args, t_shell *sh)
 {
 	int		i;
 	char	**input;
 
 	i = 0;
-	data->n_cmd = 0;
+	sh->n_cmd = 0;
 	if (args)
 	{
-		data->n_cmd = 1;
-		if (nb_cmd(data, args, i) == NO_RESULT)
+		sh->n_cmd = 1;
+		if (nb_cmd(sh, args, i) == NO_RESULT)
 			return (NO_RESULT);
 	}
-	data->in = ft_calloc(sizeof(t_input), data->n_cmd + 1);
+	sh->in = ft_calloc(sizeof(t_input), sh->n_cmd + 1);
 	i = -1;
 	input = ft_split_ex(args, '|');
-	if (parsing_misc(data, i, input) == NO_RESULT)
+	if (parsing_misc(sh, i, input) == NO_RESULT)
 		return (NO_RESULT);
-	freearray(input, data->n_cmd);
+	freearray(input, sh->n_cmd);
 	return (EXIT_SUCCESS);
 }
 
-void	parsing_elem(t_data *data, char *s, int in)
+void	parsing_elem(t_shell *sh, char *s, int in)
 {
 	int	i;
 	int	n;
 
 	i = 0;
 	n = 0;
-	while (s[i] && n < data->in[in].n_elem)
+	while (s[i] && n < sh->in[in].n_elem)
 	{
-		i += (each_elem(&data->in[in], s, i, n++));
-		if (n == data->in[in].n_elem)
+		i += (each_elem(&sh->in[in], s, i, n++));
+		if (n == sh->in[in].n_elem)
 			break ;
 		i++;
 	}
-	data->in[in].elem->cont[n] = NULL;
+	sh->in[in].elem->cont[n] = NULL;
 }
 
 int	each_elem(t_input *in, char *s, int i, int n)
@@ -75,28 +75,28 @@ int	each_elem(t_input *in, char *s, int i, int n)
 	return (i);
 }
 
-int	parsing_misc(t_data *data, int i, char **input)
+int	parsing_misc(t_shell *sh, int i, char **input)
 {
-	while (++i < data->n_cmd)
+	while (++i < sh->n_cmd)
 	{
-		if (input[i] == NULL && data->n_cmd > 1)
+		if (input[i] == NULL && sh->n_cmd > 1)
 		{
 			the_end(ERR_TOKEN, ERR_REDIR, 1);
 			return (NO_RESULT);
 		}
-		data->in[i].cont = input[i];
+		sh->in[i].cont = input[i];
 	}
 	i = -1;
-	while (++i < data->n_cmd)
+	while (++i < sh->n_cmd)
 	{
-		data->in[i].n_elem = 1;
-		count_spaces(&data->in[i], data->in[i].cont);
-		data->in[i].elem = malloc(sizeof(t_elem));
-		malloc_checker((char *)data->in[i].elem);
-		data->in[i].elem->cont = malloc(sizeof(char *)
-				* (data->in[i].n_elem + 1));
-		malloc_checker((char *)data->in[i].elem->cont);
-		parsing_elem(data, data->in[i].cont, i);
+		sh->in[i].n_elem = 1;
+		count_spaces(&sh->in[i], sh->in[i].cont);
+		sh->in[i].elem = malloc(sizeof(t_elem));
+		malloc_checker((char *)sh->in[i].elem);
+		sh->in[i].elem->cont = malloc(sizeof(char *)
+				* (sh->in[i].n_elem + 1));
+		malloc_checker((char *)sh->in[i].elem->cont);
+		parsing_elem(sh, sh->in[i].cont, i);
 	}
 	return (0);
 }
