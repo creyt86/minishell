@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   minishell copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:52:41 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/13 10:52:42 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:43:37 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_exec_cmd(char *str, char **envp_copy)
 		return ;
 	cmd->code_caractere = ft_code_char(str);
 	if (str[0])
-		str = ft_check_dollars(str, envp_copy, cmd->code_caractere);
+		str = ft_find_dollarars(str, envp_copy, cmd->code_caractere);
 	free(cmd->code_caractere);
 	cmd->code_caractere = ft_code_char(str);
 	cmd->split_pipe = ft_split_modif(str, '|', cmd->code_caractere);

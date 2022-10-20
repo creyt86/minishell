@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:00:11 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 09:53:39 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:28:27 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	parsing_init(char *args, t_shell *sh)
 {
@@ -22,7 +22,7 @@ int	parsing_init(char *args, t_shell *sh)
 	if (args)
 	{
 		sh->n_cmd = 1;
-		if (nb_cmd(sh, args, i) == NO_RESULT)
+		if (nbr_cmd(sh, args, i) == NO_RESULT)
 			return (NO_RESULT);
 	}
 	sh->in = ft_calloc(sizeof(t_input), sh->n_cmd + 1);

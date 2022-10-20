@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 10:03:10 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:43:37 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@
 # define ERR_NO_ARG "No argument(s) provided\n"
 # define CMD_404 "command not found\n"
 # define TM_ARG "too many arguments\n"
-# define HOMELESS "HOME not set\n"
-# define NOT_EVEN "Quotes are not closed\n"
+# define HOME_SET "HOME not set\n" //BULTIN ?
+# define NOT_CLOSE "Quotes are not closed\n"
 # define NOT_NUM "numeric argument required\n"
 # define ERR_MALL "malloc error\n"
-# define ERR_CHEVRON "redirection error\n"
+# define ERR_RDIR "redirection error\n"
 # define ERR_PIPE "pipe error\n"
 # define ERR_FILE "file error\n"
 # define ERR_EXE "execution error\n"
@@ -149,10 +149,10 @@ void	count_spaces(t_input *input, char *s);
 int		avoid_quotes(t_input *in, int i);
 int		avoid_n(t_input *in, int i);
 
-//parsing_elem_utils.c
+//elem_for_parsing.c
 int		malloc_elem(t_input *in, char *s, int i, int n);
 int		into_elem_quotes(t_input *in, char *s, int i, int n);
-int		nb_cmd(t_shell *sh, char *args, int i);
+int		nbr_cmd(t_shell *sh, char *args, int i);
 
 //quotes_mgmt.c
 int		d_quotes_mgmt(t_input *input, char *s, int i, int n);
@@ -193,9 +193,9 @@ void	b_init(t_shell *sh, char *envp[]);
 void	malloc_checker(char *s);
 void	freearray(char **m, int n);
 
-//var.c
-void	conv_var(t_shell *sh, int in, int i);
-char	*check_doll(t_input *in, int j, char *tmp, int i);
+//dollar.c
+void	ft_dollar(t_shell *sh, int in, int i);
+char	*find_dollar(t_input *in, int j, char *tmp, int i);
 
 //quotes_utils.c
 int		trimquotes(t_shell *sh, char *s, int in, int i);
