@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   b_builtins.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:33:11 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 09:20:00 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 14:58:21 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	b_env(t_shell *sh)
 {
@@ -23,7 +23,7 @@ int	b_env(t_shell *sh)
 			ft_printf("%s\n", sh->env[i]);
 		i++;
 	}
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_end(NULL, EXIT_SUCCESS, 0));
 }
 
 // 'exit'		-> affiche 'exit\n' et ferme
@@ -45,18 +45,18 @@ int	b_exit(t_shell *sh, int in)
 	{
 		if (ft_atoi(sh->in[in].elem->cont[1])
 			|| sh->in[in].elem->cont[1][0] == '0')
-			return (the_end(TM_ARG, EXIT_FAILURE, 1));
+			return (ft_end(TM_ARG, EXIT_FAILURE, 1));
 		free_all(sh);
-		exit (the_end(NOT_NUM, ERR_EXIT, 1));
+		exit (ft_end(NOT_NUM, ERR_EXIT, 1));
 	}
 	i = ft_atoi(sh->in[in].elem->cont[1]);
 	if (i || sh->in[in].elem->cont[1][0] == '0')
 	{
 		free_all(sh);
-		exit (the_end("exit\n", i, 0));
+		exit (ft_end("exit\n", i, 0));
 	}
 	free_all(sh);
-	exit (the_end(NOT_NUM, ERR_EXIT, 1));
+	exit (ft_end(NOT_NUM, ERR_EXIT, 1));
 }
 
 // 'pwd'		-> affiche le chemin actuel, suivi d'un \n
@@ -69,11 +69,11 @@ int	b_pwd(t_shell *sh)
 	(void)sh;
 	if (getcwd(dir, sizeof(dir)))
 		ft_printf("%s\n", dir);
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_end(NULL, EXIT_SUCCESS, 0));
 }
 
 void	free_all(t_shell *sh)
 {
 	freearray(sh->env, sh->n_env);
-	free_shell(sh);
+	free_sh(sh);
 }

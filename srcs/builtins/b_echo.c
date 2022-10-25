@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:05:52 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 16:20:36 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 14:52:26 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	b_echo(t_shell *sh, int in)
 			ft_printf("\n");
 		}
 	}
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_end(NULL, EXIT_SUCCESS, 0));
 }
 
 void	print_echo_n(t_input *in, int i)
 {
-	i = skip_n(in, i);
+	i = avoid_n(in, i);
 	while (i < in->n_elem)
 	{
 		if (ft_strncmp(in->elem->cont[i], "\0", 1))

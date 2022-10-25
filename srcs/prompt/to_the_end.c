@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   safe_word.c                                        :+:      :+:    :+:   */
+/*   to_the_end.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:25:59 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/13 14:47:57 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:06:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_exit_word(char *wd, int status, int print)
+int	ft_end(char *msg, int status, int print)
 {
-	if (!wd)
-		wd = ERROR;
+	if (!msg)
+		msg = ERROR;
 	if (status)
-		ft_putstr_fd(wd, STDERR_FILENO);
+		ft_putstr_fd(msg, STDERR_FILENO);
 	else if (print)
-		ft_printf(wd);
+		ft_printf(msg);
 	g_exit_stat = status;
 	return (status);
 }

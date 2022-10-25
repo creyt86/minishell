@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:05:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 14:40:39 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 14:52:26 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	b_export(t_shell *sh, int in)
 			i++;
 		}
 	}
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_end(NULL, EXIT_SUCCESS, 0));
 }
 
 void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val)

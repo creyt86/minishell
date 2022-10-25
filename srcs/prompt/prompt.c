@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:52:26 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_new_prompt(t_shell *sh)
 	if (!new_prompt)
 	{
 		freearray(sh->env, sh->n_env);
-		exit(the_end("exit\n", EXIT_SUCCESS, 1));
+		exit(ft_end("exit\n", EXIT_SUCCESS, 1));
 	}
 	if (!new_prompt[0] || parsing_init(new_prompt, sh) == NO_RESULT)
 	{

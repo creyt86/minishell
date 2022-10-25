@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   b_init.c                                           :+:      :+:    :+:   */
@@ -34,7 +34,7 @@ void	b_init(t_shell *sh, char *envp[])
 void	protect_malloc(char *s)
 {
 	if (!s)
-		exit(the_end(ERR_MALL, EXIT_FAILURE, 1));
+		exit(ft_end(ERR_MALL, EXIT_FAILURE, 1));
 }
 
 void	freearray(char **m, int n)

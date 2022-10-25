@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 14:07:49 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 14:10:56 by vferraro         ###   ########.fr       */
+/*   Created: 2022/10/25 14:56:50 by vferraro          #+#    #+#             */
+/*   Updated: 2022/10/25 14:56:55 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ void	init_redir(t_shell *sh, int in)
 	if (sh->in[in].n_redir > 0)
 	{
 		sh->in[in].red = ft_calloc(sizeof(t_redir), sh->in[in].n_redir);
+<<<<<<< HEAD
 		malloc_checker((char *)sh->in[in].red);
+=======
+		protect_malloc((char *)sh->in[in].red);
+>>>>>>> 8caef6e3b34786e8c6d20e6b5bbad783fb582b7c
 	}
 	sh->in[in].n_redir = 0;
 }
@@ -76,7 +80,11 @@ int	pop_redir(t_shell *sh, int in, int i)
 	{
 		sh->in[in].n_redir++;
 		sh->in[in].pos_red = NO_RESULT;
-		return (the_end(ERR_RDIR, ERR_REDIR, 1));
+<<<<<<< HEAD
+		return (ft_end(ERR_RDIR, ERR_REDIR, 1));
+=======
+		return (ft_end(ERR_RDIR, ERR_REDIR, 1));
+>>>>>>> 8caef6e3b34786e8c6d20e6b5bbad783fb582b7c
 	}
 	sh->in[in].pos_red++;
 	return (sh->in[in].pos_red);

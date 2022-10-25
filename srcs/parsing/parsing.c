@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:00:11 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 10:28:27 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:52:26 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	parsing_misc(t_shell *sh, int i, char **input)
 	{
 		if (input[i] == NULL && sh->n_cmd > 1)
 		{
-			the_end(ERR_TOKEN, ERR_REDIR, 1);
+			ft_end(ERR_TOKEN, ERR_REDIR, 1);
 			return (NO_RESULT);
 		}
 		sh->in[i].cont = input[i];
@@ -92,10 +92,10 @@ int	parsing_misc(t_shell *sh, int i, char **input)
 		sh->in[i].n_elem = 1;
 		count_spaces(&sh->in[i], sh->in[i].cont);
 		sh->in[i].elem = malloc(sizeof(t_elem));
-		malloc_checker((char *)sh->in[i].elem);
+		protect_malloc((char *)sh->in[i].elem);
 		sh->in[i].elem->cont = malloc(sizeof(char *)
 				* (sh->in[i].n_elem + 1));
-		malloc_checker((char *)sh->in[i].elem->cont);
+		protect_malloc((char *)sh->in[i].elem->cont);
 		parsing_elem(sh, sh->in[i].cont, i);
 	}
 	return (0);

@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   quotes_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 16:39:40 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/25 10:57:17 by creyt            ###   ########.fr       */
+/*   Created: 2022/10/25 14:12:33 by creyt             #+#    #+#             */
+/*   Updated: 2022/10/25 14:14:23 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_sh(t_shell *sh)
+int	trimquotes(t_shell *sh, char *s, int in, int i)
 {
-	int	i;
-	int	j;
+	char	*tmp;
+	int		ret;
 
-	i = 0;
-	while (i < sh->n_cmd)
+	ret = 0;
+	if (ft_strncmp(sh->in[in].elem->cont[i], s, ft_strlen(s)) == 0)
 	{
-		j = 0;
-		while (j < sh->in[i].n_elem)
-			free(sh->in[i].elem->cont[j++]);
-		free_redir(sh, i);
-		free(sh->in[i].elem->cont);
-		free(sh->in[i].elem);
-		i++;
+		tmp = sh->in[in].elem->cont[i];
+		sh->in[in].elem->cont[i] = ft_strtrim(sh->in[in].elem->cont[i], s);
+		free(tmp);
+		ret = 1;
 	}
-	free(sh->in);
-}
-
-void	free_redir(t_shell *sh, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < sh->in[i].n_redir)
-	{
-		free(sh->in[i].red[j].chevron);
-		free(sh->in[i].red[j].file);
-		j++;
-	}
-	free(sh->in[i].red);
+	return (ret);
 }

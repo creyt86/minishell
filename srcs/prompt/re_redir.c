@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 14:13:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/25 14:11:39 by vferraro         ###   ########.fr       */
+/*   Created: 2022/10/25 14:48:08 by vferraro          #+#    #+#             */
+/*   Updated: 2022/10/25 14:52:34 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ void	init_fd(t_shell *sh)
 	while (i < sh->n_cmd - 1)
 	{
 		if (pipe(fd) == NO_RESULT)
-			exit (the_end(ERR_PIPE, EXIT_FAILURE, 1));
+<<<<<<< HEAD
+			exit (ft_end(ERR_PIPE, EXIT_FAILURE, 1));
+=======
+			exit (ft_end(ERR_PIPE, EXIT_FAILURE, 1));
+>>>>>>> 8caef6e3b34786e8c6d20e6b5bbad783fb582b7c
 		sh->in[i].fd.out = fd[1];
 		sh->in[i + 1].fd.in = fd[0];
 		i++;

@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:36:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 11:35:17 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:52:26 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_boarders(t_shell *sh, int in)
 			}
 		}
 		freearray(sh->env, sh->n_env);
-		free_data(sh);
+		free_sh(sh);
 		exit (g_exit_stat);
 	}
 }
@@ -57,7 +57,7 @@ int	exec_middle(t_shell *sh, int in, int ok, int i)
 			free(cmd_path);
 			free_all(sh);
 			freearray(tdpp, len_array(tdpp));
-			exit (the_end(ERR_EXE, EXIT_FAILURE, 1));
+			exit (ft_end(ERR_EXE, EXIT_FAILURE, 1));
 		}
 		i++;
 		free(cmd_path);
@@ -74,7 +74,7 @@ int	on_my_way(t_shell *sh, int ok, char *cmd_path, int in)
 			dup2(sh->in[in].fd.out, STDOUT_FILENO);
 		if (sh->in[in].fd.in > 2)
 			dup2(sh->in[in].fd.in, STDIN_FILENO);
-		the_closer(sh);
+		ft_close(sh);
 		execve(cmd_path, sh->in[in].elem->cont, sh->env);
 		ok = 1;
 	}
