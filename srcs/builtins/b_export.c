@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:05:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 14:40:39 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	b_export(t_shell *sh, int in)
 			i++;
 		}
 	}
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_exit_word(NULL, EXIT_SUCCESS, 0));
 }
 
 void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val)

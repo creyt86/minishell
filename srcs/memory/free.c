@@ -6,13 +6,13 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:39:40 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 16:41:00 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 10:57:17 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_shell(t_shell *sh)
+void	free_sh(t_shell *sh)
 {
 	int	i;
 	int	j;

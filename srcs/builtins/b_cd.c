@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:27:30 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 13:53:18 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	b_cd(t_shell *sh, int in)
 		if (sh->in[in].elem->cont[i][0] == '-')
 			i = print_cd(OPT_IGN, 2);
 		if (i >= sh->in[in].n_elem)
-			return (the_end(ERR_NO_ARG, EXIT_FAILURE, 1));
+			return (ft_exit_word(ERR_NO_ARG, EXIT_FAILURE, 1));
 		if (chdir(sh->in[in].elem->cont[i]))
-			return (the_end(ERROR, EXIT_FAILURE, 1));
+			return (ft_exit_word(ERROR, EXIT_FAILURE, 1));
 	}
 	update_env(sh, dir);
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_exit_word(NULL, EXIT_SUCCESS, 0));
 }
 
 void	update_env(t_shell *sh, char *dir)
@@ -87,13 +87,13 @@ int	no_place_like_home(t_shell *sh)
 
 	i = where_in_env(sh, "HOME", 5);
 	if (i == NO_RESULT)
-		the_end(HOME_SET, EXIT_FAILURE, 1);
+		ft_exit_word(HOME_SET, EXIT_FAILURE, 1);
 	else
 	{
 		tmp = parse_env(sh->env[i]);
 		if (chdir(tmp[1]))
-			the_end(ERROR, EXIT_FAILURE, 1);
+			ft_exit_word(ERROR, EXIT_FAILURE, 1);
 		freearray(tmp, 2);
 	}
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_exit_word(NULL, EXIT_SUCCESS, 0));
 }

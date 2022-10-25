@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_new_prompt(t_shell *sh)
 	if (!new_prompt)
 	{
 		freearray(sh->env, sh->n_env);
-		exit(the_end("exit\n", EXIT_SUCCESS, 1));
+		exit(ft_exit_word("exit\n", EXIT_SUCCESS, 1));
 	}
 	if (!new_prompt[0] || parsing_init(new_prompt, sh) == NO_RESULT)
 	{

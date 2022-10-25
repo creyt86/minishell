@@ -12,15 +12,16 @@ CYAN = \033[36m
 
 NAME = minishell
 
-SRCS 	= srcs/minishell.c srcs/prompt/prompt.c srcs/prompt/safe_word.c srcs/prompt/path.c \
+SRCS 	= srcs/prompt/prompt.c srcs/prompt/safe_word.c srcs/prompt/path.c \
 		  srcs/parsing/parsing.c srcs/parsing/signals.c srcs/parsing/dollar.c srcs/parsing/execve.c \
+		  srcs/parsing/quotes.c utils/for_redir.c srcs/prompt/redir.c srcs/prompt/re_redir.c srcs/parsing/quotes_utils.c\
 		  srcs/parsing/for_parsing.c srcs/parsing/elem_for_parsing.c srcs/builtins/b_builtins.c \
-		  utils/ft_split_exception.c srcs/builtins/b_echo.c srcs/builtins/b_env_utils.c \
-		  srcs/builtins/b_cd.c srcs/builtins/b_export.c utils/ft_strjoin_free.c\
-		  srcs/builtins/b_init.c srcs/builtins/b_unset.c srcs/minishell.c \
+		  utils/ft_split_exception.c srcs/builtins/b_echo.c srcs/builtins/b_env_utils.c srcs/memory/free.c\
+		  srcs/builtins/b_cd.c srcs/builtins/b_export.c utils/ft_split_ex_utils.c utils/ft_strjoin_free.c\
+		  srcs/builtins/b_init.c srcs/builtins/b_unset.c srcs/builtins/cmd_selector.c srcs/minishell.c \
 
 OBJS 	= ${SRCS:.c=.o}
-MAIN	= srcs/minishell.c srcs/
+MAIN	= srcs/minishell.c
 
 HEADER	= -Iinclude
 

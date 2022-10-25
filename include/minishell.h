@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 13:52:27 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,9 @@ void	ft_close(t_shell *sh);
 void	prompt_quotes(t_shell *sh);
 void	ft_wait(t_shell *sh, int i);
 
+//safe_word.c
+int		ft_exit_word(char *wd, int status, int print);
+int		msg_cmd_404(t_shell *sh, int i);
 //builtins.c
 int		b_pwd(t_shell *sh);
 int		b_exit(t_shell *sh, int in);
@@ -232,7 +235,7 @@ void	sig_double(int c);
 char	*ft_set_signal(void);
 
 //error.c
-int		the_end(char *msg, int status, int print);
+int		ft_exit_word(char *msg, int status, int print);
 int		msg_cmd_404(t_shell *sh, int i);
 
 //free.c

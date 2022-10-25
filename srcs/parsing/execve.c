@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:36:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 13:21:05 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	exec_middle(t_shell *sh, int in, int ok, int i)
 			free(cmd_path);
 			free_all(sh);
 			freearray(tdpp, len_array(tdpp));
-			exit (the_end(ERR_EXE, EXIT_FAILURE, 1));
+			exit (ft_exit_word(ERR_EXE, EXIT_FAILURE, 1));
 		}
 		i++;
 		free(cmd_path);

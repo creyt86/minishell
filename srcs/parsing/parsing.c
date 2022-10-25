@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:00:11 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 13:52:27 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	parsing_misc(t_shell *sh, int i, char **input)
 	{
 		if (input[i] == NULL && sh->n_cmd > 1)
 		{
-			the_end(ERR_TOKEN, ERR_REDIR, 1);
+			ft_exit_word(ERR_TOKEN, ERR_REDIR, 1);
 			return (NO_RESULT);
 		}
 		sh->in[i].cont = input[i];

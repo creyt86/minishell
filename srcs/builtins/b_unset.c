@@ -6,7 +6,7 @@
 /*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:28:43 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 14:39:53 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 int	b_unset(t_shell *sh, int in)
 {
 	int		i;
-	char	**splited;
+	char	**tmp;
 
 	i = 0;
 	if (sh->in[in].n_elem == 1)
-		return (the_end(NULL, EXIT_SUCCESS, 00));
+		return (ft_exit_word(NULL, EXIT_SUCCESS, 00));
 	else
 	{
 		i = 1;
 		while (i < sh->in[in].n_elem)
 		{
-			splited = parse_env(sh->in[in].elem->cont[i]);
-			remove_key(sh, splited[0]);
-			freearray(splited, 2);
+			tmp = parse_env(sh->in[in].elem->cont[i]);
+			remove_key(sh, tmp[0]);
+			freearray(tmp, 2);
 			i++;
 		}
 	}
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_exit_word(NULL, EXIT_SUCCESS, 0));
 }
 
 void	remove_key(t_shell *sh, char *key)
