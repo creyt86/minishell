@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/25 15:09:30 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:39:18 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	prompt_quotes(t_shell *sh);
 void	ft_wait(t_shell *sh, int i);
 
 //safe_word.c
-int		ft_end(char *wd, int status, int print);
+int		ft_end(char *msg, int status, int print);
 int		msg_cmd_404(t_shell *sh, int i);
 //builtins.c
 int		b_pwd(t_shell *sh);
@@ -217,7 +217,7 @@ void	append_in(t_shell *sh, int i, int j);
 void	heredoc(t_shell *sh, int i, int j);
 
 //redir_again.c
-void	mgmnt_fd(t_shell *sh);
+void	run_fd(t_shell *sh);
 void	open_fd(t_shell *sh, int i, int j);
 void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);

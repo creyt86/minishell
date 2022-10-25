@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/25 15:09:30 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:26:04 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void	append_in(t_shell *sh, int i, int j);
 void	heredoc(t_shell *sh, int i, int j);
 
 //redir_again.c - Nous
-void	mgmnt_fd(t_shell *sh);
+void	run_fd(t_shell *sh);
 void	open_fd(t_shell *sh, int i, int j);
 void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
