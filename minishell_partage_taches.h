@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_partage_taches.h                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 13:52:27 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/27 11:25:43 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ typedef struct s_input
 {
 	pid_t	pid;
 	char	*cont;
-	int		n_elem;
+	int		nbr_elem;
 	t_elem	*elem;
 	t_redir	*red;
-	int		n_redir;
+	int		nbr_redir;
 	int		pos_red;
 	t_fd	fd;
 }	t_input;
@@ -106,9 +106,9 @@ typedef struct s_input
 typedef struct s_shell
 {
 	char				**env;
-	int					n_env;
+	int					nbr_env;
 	char				*path;
-	int					n_cmd;
+	int					nbr_cmd;
 	t_input				*in;
 }	t_shell;
 
@@ -164,10 +164,10 @@ void	dup_array_to_env(t_shell *sh, char **array);
 
 //cd.c - Claire
 int		b_cd(t_shell *sh, int in);
-int		where_in_env(t_shell *sh, char *key, int len);
+int		where_inbr_env(t_shell *sh, char *key, int len);
 void	update_env(t_shell *sh, char *dir);
 int		print_cd(char *s, int n);
-int		no_place_like_home(t_shell *sh);
+int		find_home(t_shell *sh);
 
 //b_export.c - Claire
 int		b_export(t_shell *sh, int in);
@@ -210,7 +210,7 @@ void	append_in(t_shell *sh, int i, int j);
 void	heredoc(t_shell *sh, int i, int j);
 
 //redir_again.c - Nous
-void	mgmnt_fd(t_shell *sh);
+void	run_fd(t_shell *sh);
 void	open_fd(t_shell *sh, int i, int j);
 void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
@@ -228,7 +228,7 @@ void	sig_double(int c);
 char	*ft_set_signal(void);
 
 //error.c - Verena - OK
-int		ft_exit_word(char *msg, int status, int print)
+int		ft_end(char *msg, int status, int print)
 int		msg_cmd_404(t_shell *sh, int i);
 
 //free.c - Claire

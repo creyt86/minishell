@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:05:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 14:40:39 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	b_export(t_shell *sh, int in)
 	int		i;
 	char	**splited;
 
-	if (sh->in[in].n_elem == 1)
+	if (sh->in[in].nbr_elem == 1)
 		sort_env(sh, in);
 	else
 	{
 		i = 1;
-		while (i < sh->in[in].n_elem)
+		while (i < sh->in[in].nbr_elem)
 		{
 			splited = parse_env(sh->in[in].elem->cont[i]);
 			add_key(sh, splited[0], splited[1]);
@@ -30,7 +30,7 @@ int	b_export(t_shell *sh, int in)
 			i++;
 		}
 	}
-	return (the_end(NULL, EXIT_SUCCESS, 0));
+	return (ft_end(NULL, EXIT_SUCCESS, 0));
 }
 
 void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val)
@@ -39,7 +39,7 @@ void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val)
 	{
 		*new_array = new_val;
 		*(new_array + 1) = NULL;
-		sh->n_env++;
+		sh->nbr_env++;
 	}
 	else
 		new_array = NULL;
@@ -55,20 +55,20 @@ void	update_key(t_shell *sh, char *key, char *val, char **new_array)
 	i = -1;
 	add_key = 1;
 	new_val = define_val(key, val);
-	while (++i < sh->n_env)
+	while (++i < sh->nbr_env)
 	{
-		exist_key = parse_env(sh->env[i]);
+		exist_key = parse_env(sh->env_cpy[i]);
 		if (!ft_strncmp(key, exist_key[0], ft_strlen(exist_key[0])))
 		{
 			add_key = 0;
 			if (val)
 				new_array[i] = ft_strdup(new_val);
 			else
-				new_array[i] = ft_strdup(sh->env[i]);
+				new_array[i] = ft_strdup(sh->env_cpy[i]);
 			free(new_val);
 		}
 		else
-			new_array[i] = ft_strdup(sh->env[i]);
+			new_array[i] = ft_strdup(sh->env_cpy[i]);
 		freearray(exist_key, 2);
 	}
 	update_arr(sh, &new_array[i], add_key, new_val);
@@ -81,11 +81,11 @@ void	add_key(t_shell *sh, char *key, char *val)
 	int		i;
 
 	add_key = 1;
-	new_array = ft_calloc(sizeof(char *), (sh->n_env + 2));
+	new_array = ft_calloc(sizeof(char *), (sh->nbr_env + 2));
 	protect_malloc((char *)new_array);
 	i = 0;
 	update_key(sh, key, val, new_array);
-	freearray(sh->env, sh->n_env);
+	freearray(sh->env_cpy, sh->nbr_env);
 	dup_array_to_env(sh, new_array);
 }
 

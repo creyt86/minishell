@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
+/*   Updated: 2022/10/27 14:02:24 by vferraro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -53,7 +64,7 @@
 # define NOT_CLOSE "Quotes are not closed\n"
 # define NOT_NUM "numeric argument required\n"
 # define ERR_MALL "malloc error\n"
-# define ERR_RDIR "redirection error\n" // etait ERR_CHEVRON
+# define ERR_RDIR "redirection error\n"
 # define ERR_PIPE "pipe error\n"
 # define ERR_FILE "file error\n"
 # define ERR_EXE "execution error\n"
@@ -85,20 +96,20 @@ typedef struct s_input
 {
 	pid_t	pid;
 	char	*cont;
-	int		n_elem;
+	int		nbr_elem;
 	t_elem	*elem;
 	t_redir	*red;
-	int		n_redir;
+	int		nbr_redir;
 	int		pos_red;
 	t_fd	fd;
 }	t_input;
 
 typedef struct s_shell
 {
-	char				**env;
-	int					n_env;
+	char				**env_cpy;
+	int					nbr_env;
 	char				*path;
-	int					n_cmd;
+	int					nbr_cmd;
 	t_input				*in;
 }	t_shell;
 
@@ -112,6 +123,9 @@ void	ft_close(t_shell *sh);
 void	prompt_quotes(t_shell *sh);
 void	ft_wait(t_shell *sh, int i);
 
+//safe_word.c
+int		ft_end(char *msg, int status, int print);
+int		msg_cmd_404(t_shell *sh, int i);
 //builtins.c
 int		b_pwd(t_shell *sh);
 int		b_exit(t_shell *sh, int in);
@@ -157,10 +171,10 @@ void	dup_array_to_env(t_shell *sh, char **array);
 
 //b_cd.c
 int		b_cd(t_shell *sh, int in);
-int		where_in_env(t_shell *sh, char *key, int len);
+int		where_inbr_env(t_shell *sh, char *key, int len);
 void	update_env(t_shell *sh, char *dir);
 int		print_cd(char *s, int n);
-int		no_place_like_home(t_shell *sh);
+int		find_home(t_shell *sh);
 
 //b_export.c
 int		b_export(t_shell *sh, int in);
@@ -201,9 +215,10 @@ void	redir_output(t_shell *sh, int i, int j);
 void	redir_input(t_shell *sh, int i, int j);
 void	append_in(t_shell *sh, int i, int j);
 void	heredoc(t_shell *sh, int i, int j);
+void	more_security(t_shell *sh, int i);
 
 //redir_again.c
-void	mgmnt_fd(t_shell *sh);
+void	run_fd(t_shell *sh);
 void	open_fd(t_shell *sh, int i, int j);
 void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
@@ -221,7 +236,7 @@ void	sig_double(int c);
 char	*ft_set_signal(void);
 
 //error.c
-int		the_end(char *msg, int status, int print);
+int		ft_end(char *msg, int status, int print);
 int		msg_cmd_404(t_shell *sh, int i);
 
 //free.c

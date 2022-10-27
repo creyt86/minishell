@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   b_init.c                                           :+:      :+:    :+:   */
@@ -19,22 +19,22 @@ void	b_init(t_shell *sh, char *envp[])
 	i = 0;
 	while (envp[i] != NULL)
 		i++;
-	sh->n_env = i;
-	sh->env = malloc(sizeof(char *) * (sh->n_env + 1));
-	protect_malloc((char *)sh->env);
+	sh->nbr_env = i;
+	sh->env_cpy = malloc(sizeof(char *) * (sh->nbr_env + 1));
+	protect_malloc((char *)sh->env_cpy);
 	i = 0;
-	while (i < sh->n_env)
+	while (i < sh->nbr_env)
 	{
-		sh->env[i] = ft_strdup(envp[i]);
-		protect_malloc(sh->env[i++]);
+		sh->env_cpy[i] = ft_strdup(envp[i]);
+		protect_malloc(sh->env_cpy[i++]);
 	}
-	sh->env[i] = NULL;
+	sh->env_cpy[i] = NULL;
 }
 
 void	protect_malloc(char *s)
 {
 	if (!s)
-		exit(the_end(ERR_MALL, EXIT_FAILURE, 1));
+		exit(ft_end(ERR_MALL, EXIT_FAILURE, 1));
 }
 
 void	freearray(char **m, int n)

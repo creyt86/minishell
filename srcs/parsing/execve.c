@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:36:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 13:21:05 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	exec_boarders(t_shell *sh, int in)
 		{
 			if (on_my_way(sh, ok, sh->in[in].elem->cont[0], in) != 1)
 			{
-				i = where_in_env(sh, "PATH", 4);
+				i = where_inbr_env(sh, "PATH", 4);
 				execution(sh, in, i, ok);
 			}
 		}
-		freearray(sh->env, sh->n_env);
+		freearray(sh->env_cpy, sh->nbr_env);
 		free_sh(sh);
 		exit (g_exit_stat);
 	}
@@ -43,7 +43,7 @@ int	exec_middle(t_shell *sh, int in, int ok, int i)
 	char		**tmp;
 	char		*cmd_path;
 
-	tmp = parse_env(sh->env[i]);
+	tmp = parse_env(sh->env_cpy[i]);
 	tdpp = ft_split(tmp[1], ':');
 	freearray(tmp, 2);
 	i = 0;
@@ -57,7 +57,7 @@ int	exec_middle(t_shell *sh, int in, int ok, int i)
 			free(cmd_path);
 			free_all(sh);
 			freearray(tdpp, len_array(tdpp));
-			exit (the_end(ERR_EXE, EXIT_FAILURE, 1));
+			exit (ft_end(ERR_EXE, EXIT_FAILURE, 1));
 		}
 		i++;
 		free(cmd_path);
@@ -75,7 +75,7 @@ int	on_my_way(t_shell *sh, int ok, char *cmd_path, int in)
 		if (sh->in[in].fd.in > 2)
 			dup2(sh->in[in].fd.in, STDIN_FILENO);
 		ft_close(sh);
-		execve(cmd_path, sh->in[in].elem->cont, sh->env);
+		execve(cmd_path, sh->in[in].elem->cont, sh->env_cpy);
 		ok = 1;
 	}
 	return (ok);
