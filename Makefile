@@ -36,7 +36,7 @@ LBFT_PATH = ./utils/libft/
 PRINTF_PATH = ./utils/ft_printf/
 
 CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS 	= -Wall -Wextra -Werror -g -fsanitize=address
 LFLAGS = -lreadline
 
 LIBS	= -L $(RL)/lib/ -lreadline -lhistory

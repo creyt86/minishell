@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:56:50 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 11:08:38 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:25:43 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	count_redir(t_shell *sh, int in)
 
 	cnt = 0;
 	j = 0;
-	while (j < sh->in[in].n_elem)
+	while (j < sh->in[in].nbr_elem)
 	{
 		if (ft_strncmp(sh->in[in].elem->cont[j], ">", 2) == 0)
 			cnt++;
@@ -36,14 +36,14 @@ int	count_redir(t_shell *sh, int in)
 
 void	init_redir(t_shell *sh, int in)
 {
-	sh->in[in].n_redir = count_redir(sh, in);
+	sh->in[in].nbr_redir = count_redir(sh, in);
 	sh->in[in].pos_red = 0;
-	if (sh->in[in].n_redir > 0)
+	if (sh->in[in].nbr_redir > 0)
 	{
-		sh->in[in].red = ft_calloc(sizeof(t_redir), sh->in[in].n_redir);
+		sh->in[in].red = ft_calloc(sizeof(t_redir), sh->in[in].nbr_redir);
 		protect_malloc((char *)sh->in[in].red);
 	}
-	sh->in[in].n_redir = 0;
+	sh->in[in].nbr_redir = 0;
 }
 
 void	shift_elem(t_shell *sh, int in, int i)
@@ -51,12 +51,12 @@ void	shift_elem(t_shell *sh, int in, int i)
 	int	j;
 
 	j = i;
-	while (j < sh->in[in].n_elem)
+	while (j < sh->in[in].nbr_elem)
 	{
 		sh->in[in].elem->cont[j] = sh->in[in].elem->cont[j + 1];
 		j++;
 	}
-	sh->in[in].n_elem--;
+	sh->in[in].nbr_elem--;
 }
 
 int	pop_redir(t_shell *sh, int in, int i)
@@ -66,15 +66,15 @@ int	pop_redir(t_shell *sh, int in, int i)
 	j = sh->in[in].pos_red;
 	sh->in[in].red[j].chevron = sh->in[in].elem->cont[i];
 	shift_elem(sh, in, i);
-	if (i < sh->in[in].n_elem)
+	if (i < sh->in[in].nbr_elem)
 	{
 		sh->in[in].red[j].file = sh->in[in].elem->cont[i];
 		shift_elem(sh, in, i);
-		sh->in[in].n_redir++;
+		sh->in[in].nbr_redir++;
 	}
 	else
 	{
-		sh->in[in].n_redir++;
+		sh->in[in].nbr_redir++;
 		sh->in[in].pos_red = NO_RESULT;
 		return (ft_end(ERR_RDIR, ERR_REDIR, 1));
 	}

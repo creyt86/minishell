@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:45:26 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 11:34:26 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	ft_dollar(t_shell *sh, int in, int i)
 	{
 		asc_question(sh, in, i);
 		tmp = ft_strtrim(sh->in[in].elem->cont[i], "$");
-		j = where_in_env(sh, tmp, ft_strlen(tmp));
+		j = where_inbr_env(sh, tmp, ft_strlen(tmp));
 		if (j == NO_RESULT)
 		{
 			tmp = find_dollar(&sh->in[in], j, tmp, i);
 			continue ;
 		}
 		free (sh->in[in].elem->cont[i]);
-		env_tmp = parse_env(sh->env[j]);
+		env_tmp = parse_env(sh->env_cpy[j]);
 		sh->in[in].elem->cont[i] = ft_strdup(env_tmp[1]);
 		freearray(env_tmp, 2);
 		free (tmp);

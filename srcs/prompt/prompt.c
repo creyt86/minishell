@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/25 14:52:26 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	prompt(char **envp)
 		prompt_quotes(&sh);
 		i = 0;
 		exec_redir(&sh);
-		while (i < sh.n_cmd)
+		while (i < sh.nbr_cmd)
 		{
 			cmd_selector(&sh, i);
 			i++;
@@ -43,7 +43,7 @@ void	ft_close(t_shell *sh)
 	int	i;
 
 	i = 0;
-	while (i < sh->n_cmd)
+	while (i < sh->nbr_cmd)
 	{
 		if (sh->in[i].fd.out > 2)
 			close(sh->in[i].fd.out);
@@ -64,7 +64,7 @@ int	ft_new_prompt(t_shell *sh)
 	free(prompt);
 	if (!new_prompt)
 	{
-		freearray(sh->env, sh->n_env);
+		freearray(sh->env_cpy, sh->nbr_env);
 		exit(ft_end("exit\n", EXIT_SUCCESS, 1));
 	}
 	if (!new_prompt[0] || parsing_init(new_prompt, sh) == NO_RESULT)
@@ -84,11 +84,11 @@ void	prompt_quotes(t_shell *sh)
 	int	quote;
 
 	i = 0;
-	while (i < sh->n_cmd)
+	while (i < sh->nbr_cmd)
 	{
 		j = 0;
 		init_redir(sh, i);
-		while (j < sh->in[i].n_elem)
+		while (j < sh->in[i].nbr_elem)
 		{
 			trimquotes(sh, "\"", i, j);
 			quote = trimquotes(sh, "\'", i, j);
@@ -96,7 +96,7 @@ void	prompt_quotes(t_shell *sh)
 				ft_dollar(sh, i, j);
 			if (checker_redir(sh, i, j) == NO_RESULT)
 				break ;
-			if (sh->in[i].n_redir > 0)
+			if (sh->in[i].nbr_redir > 0)
 				j--;
 			j++;
 		}
@@ -108,7 +108,7 @@ void	prompt_quotes(t_shell *sh)
 
 void	ft_wait(t_shell *sh, int i)
 {
-	while (i < sh->n_cmd)
+	while (i < sh->nbr_cmd)
 	{
 		if (sh->in[i].pid != NO_RESULT)
 		{

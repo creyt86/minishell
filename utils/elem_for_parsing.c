@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elem_for_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 10:24:31 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/20 13:52:27 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/27 11:24:28 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	nbr_cmd(t_shell *sh, char *args, int i)
 			}
 		}
 		if (args[i] == '|')
-			sh->n_cmd++;
+			sh->nbr_cmd++;
 		i++;
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:27:30 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/25 15:09:30 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	b_cd(t_shell *sh, int in)
 	char	dir[MAX_PATH];
 	int		i;
 
-	if (sh->in[in].n_elem == 1)
+	if (sh->in[in].nbr_elem == 1)
 	{
 		find_home(sh);
 		i = 0;
@@ -28,7 +28,7 @@ int	b_cd(t_shell *sh, int in)
 	{
 		if (sh->in[in].elem->cont[i][0] == '-')
 			i = print_cd(OPT_IGN, 2);
-		if (i >= sh->in[in].n_elem)
+		if (i >= sh->in[in].nbr_elem)
 			return (ft_end(ERR_NO_ARG, EXIT_FAILURE, 1));
 		if (chdir(sh->in[in].elem->cont[i]))
 			return (ft_end(ERROR, EXIT_FAILURE, 1));
@@ -43,30 +43,30 @@ void	update_env(t_shell *sh, char *dir)
 	int		j;
 	char	**splited;
 
-	i = where_in_env(sh, "PWD", 3);
-	j = where_in_env(sh, "OLDPWD", 6);
+	i = where_inbr_env(sh, "PWD", 3);
+	j = where_inbr_env(sh, "OLDPWD", 6);
 	if (i == NO_RESULT)
 		ft_printf(CMD_404);
 	else
 	{
-		free(sh->env[j]);
-		splited = parse_env(sh->env[i]);
-		sh->env[j] = ft_strjoin("OLDPWD=", splited[1]);
+		free(sh->env_cpy[j]);
+		splited = parse_env(sh->env_cpy[i]);
+		sh->env_cpy[j] = ft_strjoin("OLDPWD=", splited[1]);
 		freearray(splited, 2);
-		free(sh->env[i]);
-		sh->env[i] = ft_strjoin("PWD=", getcwd(dir, MAX_PATH));
+		free(sh->env_cpy[i]);
+		sh->env_cpy[i] = ft_strjoin("PWD=", getcwd(dir, MAX_PATH));
 	}
 }
 
-int	where_in_env(t_shell *sh, char *key, int len)
+int	where_inbr_env(t_shell *sh, char *key, int len)
 {
 	int	i;
 	int	diff;
 
 	i = 0;
-	while (i < sh->n_env)
+	while (i < sh->nbr_env)
 	{
-		diff = ft_strncmp(sh->env[i], key, len + 1);
+		diff = ft_strncmp(sh->env_cpy[i], key, len + 1);
 		if (diff == 0 || diff == 61)
 			return (i);
 		i++;
@@ -85,12 +85,12 @@ int	find_home(t_shell *sh)
 	int		i;
 	char	**tmp;
 
-	i = where_in_env(sh, "HOME", 5);
+	i = where_inbr_env(sh, "HOME", 5);
 	if (i == NO_RESULT)
 		ft_end(HOME_SET, EXIT_FAILURE, 1);
 	else
 	{
-		tmp = parse_env(sh->env[i]);
+		tmp = parse_env(sh->env_cpy[i]);
 		if (chdir(tmp[1]))
 			ft_end(ERROR, EXIT_FAILURE, 1);
 		freearray(tmp, 2);

@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:33:11 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/25 14:58:21 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	b_env(t_shell *sh)
 	int	i;
 
 	i = 0;
-	while (i < sh->n_env)
+	while (i < sh->nbr_env)
 	{
-		if (ft_strchr(sh->env[i], '='))
-			ft_printf("%s\n", sh->env[i]);
+		if (ft_strchr(sh->env_cpy[i], '='))
+			ft_printf("%s\n", sh->env_cpy[i]);
 		i++;
 	}
 	return (ft_end(NULL, EXIT_SUCCESS, 0));
@@ -35,13 +35,13 @@ int	b_exit(t_shell *sh, int in)
 {
 	int	i;
 
-	if (sh->in[in].n_elem == 1)
+	if (sh->in[in].nbr_elem == 1)
 	{
 		ft_printf("exit\n");
 		free_all(sh);
 		exit (g_exit_stat);
 	}
-	if (sh->in[in].n_elem > 2)
+	if (sh->in[in].nbr_elem > 2)
 	{
 		if (ft_atoi(sh->in[in].elem->cont[1])
 			|| sh->in[in].elem->cont[1][0] == '0')
@@ -74,6 +74,6 @@ int	b_pwd(t_shell *sh)
 
 void	free_all(t_shell *sh)
 {
-	freearray(sh->env, sh->n_env);
+	freearray(sh->env_cpy, sh->nbr_env);
 	free_sh(sh);
 }

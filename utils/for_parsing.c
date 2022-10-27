@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:15:25 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/19 17:02:54 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:25:43 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_quotes(t_input *in, char *s)
 	}
 	if (s_quotes % 2 || d_quotes % 2)
 		return (1);
-	in->n_elem += (s_quotes + d_quotes);
+	in->nbr_elem += (s_quotes + d_quotes);
 	return (0);
 }
 
@@ -48,7 +48,7 @@ int	avoid_spaces(char *s, int i)
 
 int	avoid_quotes(t_input *in, int i)
 {
-	while (i < in->n_elem)
+	while (i < in->nbr_elem)
 	{
 		if (ft_strncmp(in->elem->cont[i], "\"", 1) == 0)
 			i++;
@@ -62,7 +62,7 @@ int	avoid_quotes(t_input *in, int i)
 
 int	avoid_n(t_input *in, int i)
 {
-	while (i < in->n_elem)
+	while (i < in->nbr_elem)
 	{
 		if (ft_strncmp(in->elem->cont[i], "-n", 1) == 0)
 			i++;
@@ -95,7 +95,7 @@ void	count_spaces(t_input *in, char *s)
 		else if (s[i] == ' ' && s[i + 1] == '\0')
 			break ;
 		else if (s[i] == ' ' && s[i + 1] != ' ')
-			in->n_elem++;
+			in->nbr_elem++;
 		i++;
 	}
 }
