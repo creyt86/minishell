@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:56:50 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/25 15:18:13 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:08:38 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	init_redir(t_shell *sh, int in)
 	{
 		sh->in[in].red = ft_calloc(sizeof(t_redir), sh->in[in].n_redir);
 		protect_malloc((char *)sh->in[in].red);
-
 	}
 	sh->in[in].n_redir = 0;
 }

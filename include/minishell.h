@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 10:25:08 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:08:20 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,7 @@ void	redir_output(t_shell *sh, int i, int j);
 void	redir_input(t_shell *sh, int i, int j);
 void	append_in(t_shell *sh, int i, int j);
 void	heredoc(t_shell *sh, int i, int j);
+void	more_security(t_shell *sh, int i);
 
 //redir_again.c
 void	run_fd(t_shell *sh);

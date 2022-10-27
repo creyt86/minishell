@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:48:14 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 10:38:45 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 11:08:29 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	heredoc(t_shell *sh, int i, int j)
 	}
 	free(h_prompt);
 	close(fd[1]);
-	if (sh->in[i].fd.in > 2)
-		close(sh->in[i].fd.in);
+	more_security(sh, i);
 	sh->in[i].fd.in = fd[0];
 }
