@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:48:14 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/25 16:49:56 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:38:45 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,33 +68,30 @@ void	append_in(t_shell *sh, int i, int j)
 }
 
 // '<<'
-void	heredoc(t_shell *sh, int i, int j)  // attention ca segfault et ne sort pas correctement
+void	heredoc(t_shell *sh, int i, int j)
 {
 	int		fd[2];
 	char	*limiter;
-	char	*prompt;
+	char	*h_prompt;
 
 	if (pipe(fd) == NO_RESULT)
 		ft_end(ERR_PIPE, EXIT_FAILURE, 1);
 	limiter = sh->in[i].red[j].file;
-	prompt = NULL;
+	h_prompt = NULL;
 	while (1)
 	{
-		prompt = readline("> ");
-		if (!prompt)
+		h_prompt = readline("> ");
+		if (!h_prompt)
 			break ;
-		if (ft_strncmp(prompt, limiter, ft_strlen(limiter)) == 0)
-		{
-			exit(EXIT_SUCCESS);
-			execve(fd[2], "./minishell", &prompt); // trouver comment revenir au minishell sans sortir du programme
-		}
-		if (ft_strncmp(prompt, limiter, (ft_strlen(limiter) + 1)))
-			ft_putendl_fd(prompt, fd[1]);
+		if (ft_strncmp(h_prompt, limiter, ft_strlen(limiter)) == 0)
+			prompt(sh->env);
+		if (ft_strncmp(h_prompt, limiter, (ft_strlen(limiter) + 1)))
+			ft_putendl_fd(h_prompt, fd[1]);
 		else
 			break ;
-		free(prompt);
+		free(h_prompt);
 	}
-	free(prompt);
+	free(h_prompt);
 	close(fd[1]);
 	if (sh->in[i].fd.in > 2)
 		close(sh->in[i].fd.in);
