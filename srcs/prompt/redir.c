@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:48:14 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 11:31:59 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:21:22 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 
@@ -19,7 +18,7 @@ void	exec_redir(t_shell *sh)
 	run_fd(sh);
 }
 
-// '<'
+// '<' read th fd
 void	redir_input(t_shell *sh, int i, int j)
 {
 	int	fd;
@@ -29,13 +28,12 @@ void	redir_input(t_shell *sh, int i, int j)
 		ft_end(ERR_FILE, EXIT_FAILURE, 1);
 	else
 	{
-		if (sh->in[i].fd.in > 2)
-			close(sh->in[i].fd.in);
+		more_security_in(sh, i);
 		sh->in[i].fd.in = fd;
 	}
 }
 
-// '>'
+// '>' write in the fd
 void	redir_output(t_shell *sh, int i, int j)
 {
 	int	fd;
@@ -45,13 +43,12 @@ void	redir_output(t_shell *sh, int i, int j)
 		ft_end(ERR_FILE, EXIT_FAILURE, 1);
 	else
 	{
-		if (sh->in[i].fd.out > 2)
-			close(sh->in[i].fd.out);
+		more_security_out(sh, i);
 		sh->in[i].fd.out = fd;
 	}
 }
 
-// '>>'
+// '>>' ajoute a la fin du fichier sans ecraser le fichier
 void	append_in(t_shell *sh, int i, int j)
 {
 	int	fd;
@@ -61,8 +58,7 @@ void	append_in(t_shell *sh, int i, int j)
 		ft_end(ERR_FILE, EXIT_FAILURE, 1);
 	else
 	{
-		if (sh->in[i].fd.out > 2)
-			close(sh->in[i].fd.out);
+		more_security_out(sh, i);
 		sh->in[i].fd.out = fd;
 	}
 }
@@ -93,6 +89,6 @@ void	heredoc(t_shell *sh, int i, int j)
 	}
 	free(h_prompt);
 	close(fd[1]);
-	more_security(sh, i);
+	more_security_in(sh, i);
 	sh->in[i].fd.in = fd[0];
 }

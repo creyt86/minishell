@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:39:40 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 11:25:43 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:06:22 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ void	free_redir(t_shell *sh, int i)
 		j++;
 	}
 	free(sh->in[i].red);
+}
+
+void	freetab(char **box, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+		free(box[i++]);
+	free(box);
 }

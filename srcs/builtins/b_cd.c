@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:27:30 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	update_env(t_shell *sh, char *dir)
 	int		j;
 	char	**splited;
 
-	i = where_inbr_env(sh, "PWD", 3);
-	j = where_inbr_env(sh, "OLDPWD", 6);
+	i = where_in_env(sh, "PWD", 3);
+	j = where_in_env(sh, "OLDPWD", 6);
 	if (i == NO_RESULT)
 		ft_printf(CMD_404);
 	else
@@ -52,13 +52,13 @@ void	update_env(t_shell *sh, char *dir)
 		free(sh->env_cpy[j]);
 		splited = parse_env(sh->env_cpy[i]);
 		sh->env_cpy[j] = ft_strjoin("OLDPWD=", splited[1]);
-		freearray(splited, 2);
+		freetab(splited, 2);
 		free(sh->env_cpy[i]);
 		sh->env_cpy[i] = ft_strjoin("PWD=", getcwd(dir, MAX_PATH));
 	}
 }
 
-int	where_inbr_env(t_shell *sh, char *key, int len)
+int	where_in_env(t_shell *sh, char *key, int len)
 {
 	int	i;
 	int	diff;
@@ -85,7 +85,7 @@ int	find_home(t_shell *sh)
 	int		i;
 	char	**tmp;
 
-	i = where_inbr_env(sh, "HOME", 5);
+	i = where_in_env(sh, "HOME", 5);
 	if (i == NO_RESULT)
 		ft_end(HOME_SET, EXIT_FAILURE, 1);
 	else
@@ -93,7 +93,7 @@ int	find_home(t_shell *sh)
 		tmp = parse_env(sh->env_cpy[i]);
 		if (chdir(tmp[1]))
 			ft_end(ERROR, EXIT_FAILURE, 1);
-		freearray(tmp, 2);
+		freetab(tmp, 2);
 	}
 	return (ft_end(NULL, EXIT_SUCCESS, 0));
 }

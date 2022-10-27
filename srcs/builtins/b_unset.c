@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_unset.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:28:43 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	b_unset(t_shell *sh, int in)
 		{
 			tmp = parse_env(sh->in[in].elem->cont[i]);
 			remove_key(sh, tmp[0]);
-			freearray(tmp, 2);
+			freetab(tmp, 2);
 			i++;
 		}
 	}
@@ -54,11 +54,11 @@ void	remove_key(t_shell *sh, char *key)
 			new_array[j++] = ft_strdup(sh->env_cpy[i]);
 		else
 			rem_key = 1;
-		freearray(exist_key, 2);
+		freetab(exist_key, 2);
 	}
 	new_array[j] = NULL;
 	if (rem_key == 1)
 		sh->nbr_env--;
-	freearray(sh->env_cpy, sh->nbr_env + 1);
+	freetab(sh->env_cpy, sh->nbr_env + 1);
 	dup_array_to_env(sh, new_array);
 }

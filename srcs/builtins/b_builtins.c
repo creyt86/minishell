@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_builtins.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:33:11 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int	b_pwd(t_shell *sh)
 
 void	free_all(t_shell *sh)
 {
-	freearray(sh->env_cpy, sh->nbr_env);
+	freetab(sh->env_cpy, sh->nbr_env);
 	free_sh(sh);
 }

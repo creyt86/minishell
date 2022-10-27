@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 14:02:24 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@
 
 # define ERROR "Error\n"
 # define OPT_IGN "Option(s) ignored\n"
-# define ERR_ARG "Argument invalid in this scope\n"
 # define ERR_NO_ARG "No argument(s) provided\n"
 # define CMD_404 "command not found\n"
 # define TM_ARG "too many arguments\n"
@@ -171,7 +170,7 @@ void	dup_array_to_env(t_shell *sh, char **array);
 
 //b_cd.c
 int		b_cd(t_shell *sh, int in);
-int		where_inbr_env(t_shell *sh, char *key, int len);
+int		where_in_env(t_shell *sh, char *key, int len);
 void	update_env(t_shell *sh, char *dir);
 int		print_cd(char *s, int n);
 int		find_home(t_shell *sh);
@@ -194,7 +193,7 @@ void	print_echo_n(t_input *in, int i);
 //b_init.c
 void	b_init(t_shell *sh, char *envp[]);
 void	protect_malloc(char *s);
-void	freearray(char **m, int n);
+void	freetab(char **box, int n);
 
 //dollar.c
 void	ft_dollar(t_shell *sh, int in, int i);
@@ -215,7 +214,8 @@ void	redir_output(t_shell *sh, int i, int j);
 void	redir_input(t_shell *sh, int i, int j);
 void	append_in(t_shell *sh, int i, int j);
 void	heredoc(t_shell *sh, int i, int j);
-void	more_security(t_shell *sh, int i);
+void	more_security_in(t_shell *sh, int i);
+void	more_security_out(t_shell *sh, int i);
 
 //redir_again.c
 void	run_fd(t_shell *sh);

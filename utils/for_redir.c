@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:56:50 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 11:25:43 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:28:38 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 int	count_redir(t_shell *sh, int in)
 {
-	int	cnt;
+	int	count;
 	int	j;
 
-	cnt = 0;
+	count = 0;
 	j = 0;
 	while (j < sh->in[in].nbr_elem)
 	{
 		if (ft_strncmp(sh->in[in].elem->cont[j], ">", 2) == 0)
-			cnt++;
+			count++;
 		else if (ft_strncmp(sh->in[in].elem->cont[j], "<", 2) == 0)
-			cnt++;
+			count++;
 		else if (ft_strncmp(sh->in[in].elem->cont[j], ">>", 3) == 0)
-			cnt++;
+			count++;
 		else if (ft_strncmp(sh->in[in].elem->cont[j], "<<", 3) == 0)
-			cnt++;
+			count++;
 		j++;
 	}
-	return (cnt);
+	return (count);
 }
 
 void	init_redir(t_shell *sh, int in)

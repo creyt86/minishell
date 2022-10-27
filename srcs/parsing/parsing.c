@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:00:11 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 11:25:43 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parsing_init(char *args, t_shell *sh)
 	input = ft_split_ex(args, '|');
 	if (parsing_misc(sh, i, input) == NO_RESULT)
 		return (NO_RESULT);
-	freearray(input, sh->nbr_cmd);
+	freetab(input, sh->nbr_cmd);
 	return (EXIT_SUCCESS);
 }
 

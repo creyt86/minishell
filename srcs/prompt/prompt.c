@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_new_prompt(t_shell *sh)
 	free(prompt);
 	if (!new_prompt)
 	{
-		freearray(sh->env_cpy, sh->nbr_env);
+		freetab(sh->env_cpy, sh->nbr_env);
 		exit(ft_end("exit\n", EXIT_SUCCESS, 1));
 	}
 	if (!new_prompt[0] || parsing_init(new_prompt, sh) == NO_RESULT)
@@ -77,7 +77,9 @@ int	ft_new_prompt(t_shell *sh)
 	return (0);
 }
 
-void	prompt_quotes(t_shell *sh)
+/* Ne pas interpréter de quotes (guillemets) non fermés ou de caractères spéciaux 
+non demandés dans le sujet, tels que \ (le backslash) ou ; (le point-virgule). */
+void	prompt_quotes(t_shell *sh) 
 {
 	int	i;
 	int	j;
