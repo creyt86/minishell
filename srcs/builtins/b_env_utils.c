@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_env_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:10:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:43 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_env(t_shell *sh, int in, char **elem)
 			else if (export[0])
 				ft_printf("declare -x %s\n", export[0]);
 			i++;
-			freearray(export, 2);
+			freetab(export, 2);
 		}
 	}
 }
@@ -82,7 +82,7 @@ void	sort_env(t_shell *sh, int in)
 		i++;
 	}
 	print_env(sh, in, export);
-	freearray(export, sh->nbr_env);
+	freetab(export, sh->nbr_env);
 }
 
 void	dup_array_to_env(t_shell *sh, char **array)

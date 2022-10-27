@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 11:26:50 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:07:47 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void	dup_array_to_env(t_shell *sh, char **array);
 
 //b_cd.c
 int		b_cd(t_shell *sh, int in);
-int		where_inbr_env(t_shell *sh, char *key, int len);
+int		where_in_env(t_shell *sh, char *key, int len);
 void	update_env(t_shell *sh, char *dir);
 int		print_cd(char *s, int n);
 int		find_home(t_shell *sh);
@@ -194,7 +194,6 @@ void	print_echo_n(t_input *in, int i);
 //b_init.c
 void	b_init(t_shell *sh, char *envp[]);
 void	protect_malloc(char *s);
-void	freearray(char **m, int n);
 
 //dollar.c
 void	ft_dollar(t_shell *sh, int in, int i);
@@ -235,13 +234,14 @@ void	sig_int(int c);
 void	sig_double(int c);
 char	*ft_set_signal(void);
 
-//error.c
+//to_the_end.c
 int		ft_end(char *msg, int status, int print);
 int		msg_cmd_404(t_shell *sh, int i);
 
 //free.c
 void	free_sh(t_shell *sh);
 void	free_redir(t_shell *sh, int i);
+void	freetab(char **m, int n);
 
 //ft_split_exception_utils.c
 int		check_qts_split(char *s, int i, char c);

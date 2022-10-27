@@ -36,13 +36,3 @@ void	protect_malloc(char *s)
 	if (!s)
 		exit(ft_end(ERR_MALL, EXIT_FAILURE, 1));
 }
-
-void	freearray(char **m, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-		free(m[i++]);
-	free(m);
-}

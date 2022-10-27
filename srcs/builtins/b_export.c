@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:05:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 11:31:33 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:04:43 by creyt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	b_export(t_shell *sh, int in)
 		{
 			splited = parse_env(sh->in[in].elem->cont[i]);
 			add_key(sh, splited[0], splited[1]);
-			freearray(splited, 2);
+			freetab(splited, 2);
 			i++;
 		}
 	}
@@ -69,7 +69,7 @@ void	update_key(t_shell *sh, char *key, char *val, char **new_array)
 		}
 		else
 			new_array[i] = ft_strdup(sh->env_cpy[i]);
-		freearray(exist_key, 2);
+		freetab(exist_key, 2);
 	}
 	update_arr(sh, &new_array[i], add_key, new_val);
 }
@@ -77,15 +77,11 @@ void	update_key(t_shell *sh, char *key, char *val, char **new_array)
 void	add_key(t_shell *sh, char *key, char *val)
 {
 	char	**new_array;
-	int		add_key;
-	int		i;
 
-	add_key = 1;
 	new_array = ft_calloc(sizeof(char *), (sh->nbr_env + 2));
 	protect_malloc((char *)new_array);
-	i = 0;
 	update_key(sh, key, val, new_array);
-	freearray(sh->env_cpy, sh->nbr_env);
+	freetab(sh->env_cpy, sh->nbr_env);
 	dup_array_to_env(sh, new_array);
 }
 
