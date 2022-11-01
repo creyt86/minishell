@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:36:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/11/01 13:08:26 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:39:19 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	exec_boarders(t_shell *sh, int in)
 
 int	exec_middle(t_shell *sh, int in, int ok, int i)
 {
-	char		**tdpp; // ca correspond a quoi
+	char		**tdpp;
 	char		**tmp;
 	char		*cmd_path;
 

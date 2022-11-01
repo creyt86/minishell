@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   for_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:56:50 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 14:28:38 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:45:06 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,13 @@ int	count_redir(t_shell *sh, int in)
 
 void	init_redir(t_shell *sh, int in)
 {
-    sh->in[in].nbr_redir = count_redir(sh, in);
-    sh->in[in].pos_red = 0;
-    if (sh->in[in].nbr_redir > 0)
+	sh->in[in].nbr_redir = count_redir(sh, in);
+	sh->in[in].pos_red = 0;
+	if (sh->in[in].nbr_redir > 0)
 	{
-        sh->in[in].red = ft_calloc(sizeof(t_redir), sh->in[in].nbr_redir);
-        protect_malloc((char *)sh->in[in].red);
-    }
-//    sh->in[in].nbr_redir = 0;
+		sh->in[in].red = ft_calloc(sizeof(t_redir), sh->in[in].nbr_redir);
+		protect_malloc((char *)sh->in[in].red);
+	}
 }
 
 void	shift_elem(t_shell *sh, int in, int i)
@@ -70,11 +69,9 @@ int	pop_redir(t_shell *sh, int in, int i)
 	{
 		sh->in[in].red[j].file = sh->in[in].elem->cont[i];
 		shift_elem(sh, in, i);
-//		sh->in[in].nbr_redir++;
 	}
 	else
 	{
-//		sh->in[in].nbr_redir++;
 		sh->in[in].pos_red = NO_RESULT;
 		return (ft_end(ERR_RDIR, ERR_REDIR, 1));
 	}

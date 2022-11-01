@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/11/01 14:51:36 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:54:20 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_fd
 typedef struct s_input
 {
 	pid_t	pid;
-	char	*cont; // contenant
+	char	*cont;
 	int		nbr_elem;
 	t_elem	*elem;
 	t_redir	*red;
@@ -121,10 +121,12 @@ int		ft_new_prompt(t_shell *sh);
 void	ft_close(t_shell *sh);
 void	prompt_quotes(t_shell *sh);
 void	ft_wait(t_shell *sh, int i);
+void	checker_redir_files(t_shell *sh, int i, int j);
 
 //safe_word.c
 int		ft_end(char *msg, int status, int print);
 int		msg_cmd_404(t_shell *sh, int i);
+
 //builtins.c
 int		b_pwd(t_shell *sh);
 int		b_exit(t_shell *sh, int in);
@@ -246,7 +248,7 @@ void	free_redir(t_shell *sh, int i);
 //ft_split_exception_utils.c
 int		check_qts_split(char *s, int i, char c);
 char	**ft_split_ex(char const *s, char c);
-int		is_quotes(char *s, int i);
+int		ft_quotes(char *s, int i);
 
 //ft_strjoin_free.c
 char	*ft_strjoin_free(char const *s1, char const *s2);

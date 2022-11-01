@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/11/01 15:18:21 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:58:14 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,32 +82,47 @@ int	ft_new_prompt(t_shell *sh)
 /* Ne pas interpréter de quotes (guillemets) non fermés ou de caractères
 spéciaux non demandés dans le sujet, tels que \ (le backslash) ou ; 
 (le point-virgule). */
+// void	prompt_quotes(t_shell *sh)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	quote;
+
+// 	i = 0;
+// 	while (i < sh->nbr_cmd)
+// 	{
+// 		init_redir(sh, i);
+// 		j = 0;
+// 		while (j < sh->in[i].nbr_elem)
+// 		{
+// 			trimquotes(sh, "\"", i, j);
+// 			quote = trimquotes(sh, "\'", i, j);
+// 			if (!quote)
+// 				ft_dollar(sh, i, j);
+// 			if ((checker_redir(sh, i, j)) == NO_RESULT)
+// 				break ;
+// 			else if ((checker_redir(sh, i, j)) > 0)
+// 				continue ;
+// 			j++;
+// 		}
+// 		if (sh->in[i].pos_red == NO_RESULT)
+// 			break ;
+// 		i++;
+// 	}
+// }
+
 void	prompt_quotes(t_shell *sh)
 {
 	int	i;
 	int	j;
-	int	quote;
-	int	test;
 
 	i = 0;
-    while (i < sh->nbr_cmd)
+	while (i < sh->nbr_cmd)
 	{
-        init_redir(sh, i);
-        j = 0;
-		while (j < sh->in[i].nbr_elem)
-		{
-			trimquotes(sh, "\"", i, j);
-			quote = trimquotes(sh, "\'", i, j);
-			if (!quote)
-				ft_dollar(sh, i, j);
-            test = checker_redir(sh, i, j);
-			if (test == NO_RESULT)
-				break ;
-            else if (test > 0)
-                continue;
-            j++;
-        }
-        if (sh->in[i].pos_red == NO_RESULT)
+		init_redir(sh, i);
+		j = 0;
+		checker_redir_files(sh, i, j);
+		if (sh->in[i].pos_red == NO_RESULT)
 			break ;
 		i++;
 	}

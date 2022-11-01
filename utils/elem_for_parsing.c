@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 10:24:31 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 11:24:28 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:40:55 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	nbr_cmd(t_shell *sh, char *args, int i)
 	{
 		if (args[i] == '\"' || args[i] == '\'')
 		{
-			i = is_quotes(args, i); // CHANGER LE NOM EN FT_QUOTES ???
+			i = ft_quotes(args, i);
 			if (i == NO_RESULT)
 			{
 				ft_printf(NOT_CLOSE);
@@ -43,14 +43,14 @@ int	malloc_elem(t_input *in, char *s, int i, int n)
 
 	j = 0;
 	if (s[i] == '\"' || s[i] == '\'')
-			j = (is_quotes(s, i));
+			j = (ft_quotes(s, i));
 	else
 	{
 		while (i < (int) ft_strlen(s))
 		{
 			if (s[i] == '\"' || s[i] == '\'')
 			{
-				j = (is_quotes(s, i));
+				j = (ft_quotes(s, i));
 				i = j;
 			}
 			if (!s[i])
