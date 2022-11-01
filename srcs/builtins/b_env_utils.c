@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_env_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:10:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/10/27 16:42:46 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	sort_env(t_shell *sh, int in)
 	freetab(export, sh->nbr_env);
 }
 
-void	dup_array_to_env(t_shell *sh, char **array)
+void	dup_table_to_env(t_shell *sh, char **table)
 {
 	int	i;
 
@@ -93,7 +93,7 @@ void	dup_array_to_env(t_shell *sh, char **array)
 	protect_malloc((char *)sh->env_cpy);
 	i = -1;
 	while (++i < sh->nbr_env)
-		sh->env_cpy[i] = array[i];
+		sh->env_cpy[i] = table[i];
 	sh->env_cpy[i] = NULL;
-	free(array);
+	free(table);
 }

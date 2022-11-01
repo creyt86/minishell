@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:48:14 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 14:21:22 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:28:36 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,10 @@ void	heredoc(t_shell *sh, int i, int j)
 	while (1)
 	{
 		h_prompt = readline("> ");
-		if (!h_prompt)
+		if (!h_prompt
+			|| ft_strncmp(h_prompt, limiter, (ft_strlen(limiter) + 1)) == 0)
 			break ;
-		if (ft_strncmp(h_prompt, limiter, ft_strlen(limiter)) == 0)
-			prompt(sh->env_cpy);
-		if (ft_strncmp(h_prompt, limiter, (ft_strlen(limiter) + 1)))
-			ft_putendl_fd(h_prompt, fd[1]);
-		else
-			break ;
+		ft_putendl_fd(h_prompt, fd[1]);
 		free(h_prompt);
 	}
 	free(h_prompt);

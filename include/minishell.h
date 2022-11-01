@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 14:09:38 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct s_fd
 typedef struct s_input
 {
 	pid_t	pid;
-	char	*cont;
+	char	*cont; // contenant
 	int		nbr_elem;
 	t_elem	*elem;
 	t_redir	*red;
@@ -166,7 +166,7 @@ char	**parse_env(char *s);
 void	sort_env(t_shell *sh, int in);
 void	print_env(t_shell *sh, int in, char **elem);
 void	the_sorter(t_shell *sh, char *tempura, char *a, char *b);
-void	dup_array_to_env(t_shell *sh, char **array);
+void	dup_table_to_env(t_shell *sh, char **table);
 
 //b_cd.c
 int		b_cd(t_shell *sh, int in);
@@ -179,8 +179,8 @@ int		find_home(t_shell *sh);
 int		b_export(t_shell *sh, int in);
 void	add_key(t_shell *sh, char *key, char *val);
 char	*define_val(char *key, char *val);
-void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val);
-void	update_key(t_shell *sh, char *key, char *val, char **new_array);
+void	update_arr(t_shell *sh, char **new_table, int add_key, char *new_val);
+void	update_key(t_shell *sh, char *key, char *val, char **new_table);
 
 //b_unset.c
 int		b_unset(t_shell *sh, int in);
@@ -228,7 +228,7 @@ void	exec_boarders(t_shell *sh, int in);
 int		exec_middle(t_shell *sh, int in, int ok, int i);
 int		on_my_way(t_shell *sh, int ok, char *cmd_path, int in);
 void	execution(t_shell *sh, int in, int i, int ok);
-int		len_array(char **array);
+int		len_tab(char **table);
 
 //signals.c
 void	sig_int(int c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 09:27:30 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:08:04 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	update_env(t_shell *sh, char *dir)
 	int		j;
 	char	**splited;
 
-	i = where_in_env(sh, "PWD", 3);
-	j = where_in_env(sh, "OLDPWD", 6);
+	i = where_in_env(sh, "PWD", 4);
+	j = where_in_env(sh, "OLDPWD", 7);
 	if (i == NO_RESULT)
 		ft_printf(CMD_404);
 	else
@@ -66,7 +66,7 @@ int	where_in_env(t_shell *sh, char *key, int len)
 	i = 0;
 	while (i < sh->nbr_env)
 	{
-		diff = ft_strncmp(sh->env_cpy[i], key, len + 1);
+		diff = ft_strncmp(sh->env_cpy[i], key, len);
 		if (diff == 0 || diff == 61)
 			return (i);
 		i++;

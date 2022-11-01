@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:36:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:08:26 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_boarders(t_shell *sh, int in)
 		{
 			if (on_my_way(sh, ok, sh->in[in].elem->cont[0], in) != 1)
 			{
-				i = where_in_env(sh, "PATH", 4);
+				i = where_in_env(sh, "PATH", 5);
 				execution(sh, in, i, ok);
 			}
 		}
@@ -39,7 +39,7 @@ void	exec_boarders(t_shell *sh, int in)
 
 int	exec_middle(t_shell *sh, int in, int ok, int i)
 {
-	char		**tdpp;
+	char		**tdpp; // ca correspond a quoi
 	char		**tmp;
 	char		*cmd_path;
 
@@ -56,7 +56,7 @@ int	exec_middle(t_shell *sh, int in, int ok, int i)
 		{
 			free(cmd_path);
 			free_all(sh);
-			freetab(tdpp, len_array(tdpp));
+			freetab(tdpp, len_tab(tdpp));
 			exit (ft_end(ERR_EXE, EXIT_FAILURE, 1));
 		}
 		i++;
@@ -93,12 +93,12 @@ void	execution(t_shell *sh, int in, int i, int ok)
 	}
 }
 
-int	len_array(char **array)
+int	len_tab(char **table)
 {
 	int	i;
 
 	i = 0;
-	while (array[i])
+	while (table[i])
 		i++;
 	return (i);
 }

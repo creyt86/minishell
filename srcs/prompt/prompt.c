@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vferraro <vferraror@student.42lausanne.    +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 15:56:12 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/27 16:04:00 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 14:20:17 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	prompt(char **envp)
 		exec_redir(&sh);
 		while (i < sh.nbr_cmd)
 		{
+			if (!sh.in[i].elem->cont[0])
+				break ;
 			cmd_selector(&sh, i);
 			i++;
 		}
@@ -90,8 +92,9 @@ void	prompt_quotes(t_shell *sh)
 	{
 		j = 0;
 		init_redir(sh, i);
-		while (j < sh->in[i].nbr_elem)
+		while (j <= sh->in[i].nbr_elem)
 		{
+			printf("loop[%d]\n", sh->in[i].nbr_elem);
 			trimquotes(sh, "\"", i, j);
 			quote = trimquotes(sh, "\'", i, j);
 			if (!quote)
