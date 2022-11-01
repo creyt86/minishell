@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/11/01 14:09:38 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/01 14:51:36 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@
 # define ERR_MALL "malloc error\n"
 # define ERR_RDIR "redirection error\n"
 # define ERR_PIPE "pipe error\n"
-# define ERR_FILE "file error\n"
+# define ERR_FILE "No such file or directory\n"
 # define ERR_EXE "execution error\n"
 # define ERR_TOKEN "syntax error near unexpected token\n"
 

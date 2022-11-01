@@ -53,8 +53,8 @@ ${NAME}:	${OBJS}
 					@echo "$(CYAN)---- Compiling library ----"
 					@sleep 0.2
 					@echo "$(GREEN2)📚 Link paths"
-					@$(MAKE) -C $(LBFT_PATH)
-					@$(MAKE) -C $(PRINTF_PATH)
+					#@$(MAKE) -C $(LBFT_PATH)
+					#@$(MAKE) -C $(PRINTF_PATH)
 					@$(CC) $(CFLAGS) ${LFLAGS} ${OBJS} -o $(NAME) $(LIB) $(LIBS)
 					@printf "$(BLUE)🍵 Creating $(NAME)$(RESET)\n"
 					@sleep 0.2
