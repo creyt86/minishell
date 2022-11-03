@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 16:39:40 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 16:42:46 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:14:23 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,10 @@ void	freetab(char **box, int n)
 	while (i < n)
 		free(box[i++]);
 	free(box);
+}
+
+void	free_all(t_shell *sh)
+{
+	freetab(sh->env_cpy, sh->nbr_env);
+	free_sh(sh);
 }

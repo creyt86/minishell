@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/11/01 17:54:20 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:15:11 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int		msg_cmd_404(t_shell *sh, int i);
 int		b_pwd(t_shell *sh);
 int		b_exit(t_shell *sh, int in);
 int		b_env(t_shell *sh);
-void	free_all(t_shell *sh);
+void	exit_free(t_shell *sh);
 
 //cmd_selector.c
 void	cmd_selector(t_shell *sh, int i);
@@ -244,6 +244,7 @@ int		msg_cmd_404(t_shell *sh, int i);
 //free.c
 void	free_sh(t_shell *sh);
 void	free_redir(t_shell *sh, int i);
+void	free_all(t_shell *sh);
 
 //ft_split_exception_utils.c
 int		check_qts_split(char *s, int i, char c);

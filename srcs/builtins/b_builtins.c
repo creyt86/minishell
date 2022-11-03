@@ -6,7 +6,7 @@
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:33:11 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/27 16:42:46 by vferraro         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:38:29 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,23 @@ int	b_env(t_shell *sh)
 	return (ft_end(NULL, EXIT_SUCCESS, 0));
 }
 
-// 'exit'		-> affiche 'exit\n' et ferme
-// 'exit texte'	-> affiche 'exit\n' puis un message erreur et ferme
-// exit values : celles de la commande precedente
-////////////////////////////////////////
+void	recup_mess(t_shell *sh)
+{
+	char	dir[MAX_PATH];
+
+	if (getcwd(dir, sizeof(dir)))
+		ft_printf("exit: %s: ", sh->in->elem->cont[1]);
+}
+
+void	exit_free(t_shell *sh)
+{
+	free_all(sh);
+	exit (ft_end(NOT_NUM, ERR_EXIT, 1));
+}
 
 int	b_exit(t_shell *sh, int in)
 {
-	int	i;
+	int		i;
 
 	if (sh->in[in].nbr_elem == 1)
 	{
@@ -46,8 +55,7 @@ int	b_exit(t_shell *sh, int in)
 		if (ft_atoi(sh->in[in].elem->cont[1])
 			|| sh->in[in].elem->cont[1][0] == '0')
 			return (ft_end(TM_ARG, EXIT_FAILURE, 1));
-		free_all(sh);
-		exit (ft_end(NOT_NUM, ERR_EXIT, 1));
+		exit_free(sh);
 	}
 	i = ft_atoi(sh->in[in].elem->cont[1]);
 	if (i || sh->in[in].elem->cont[1][0] == '0')
@@ -55,13 +63,12 @@ int	b_exit(t_shell *sh, int in)
 		free_all(sh);
 		exit (ft_end("exit\n", i, 0));
 	}
-	free_all(sh);
-	exit (ft_end(NOT_NUM, ERR_EXIT, 1));
+	else
+		recup_mess(sh);
+	exit_free(sh);
+	return (0);
 }
 
-// 'pwd'		-> affiche le chemin actuel, suivi d'un \n
-// 'pwd texte	-> message d'erreur : 'pwd: too many arguments'
-///////////////////////////////////////////////////////////////
 int	b_pwd(t_shell *sh)
 {
 	char	dir[MAX_PATH];
@@ -70,10 +77,4 @@ int	b_pwd(t_shell *sh)
 	if (getcwd(dir, sizeof(dir)))
 		ft_printf("%s\n", dir);
 	return (ft_end(NULL, EXIT_SUCCESS, 0));
-}
-
-void	free_all(t_shell *sh)
-{
-	freetab(sh->env_cpy, sh->nbr_env);
-	free_sh(sh);
 }
