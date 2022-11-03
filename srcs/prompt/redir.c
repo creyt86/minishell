@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 13:52:28 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/25 14:11:35 by creyt            ###   ########.fr       */
+/*   Created: 2022/10/25 14:48:14 by vferraro          #+#    #+#             */
+/*   Updated: 2022/11/01 14:50:42 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,53 +15,50 @@
 void	exec_redir(t_shell *sh)
 {
 	init_fd(sh);
-	mgmnt_fd(sh);
+	run_fd(sh);
 }
 
-// '<'
+// '<' read th fd
 void	redir_input(t_shell *sh, int i, int j)
 {
 	int	fd;
 
 	fd = open(sh->in[i].red[j].file, O_RDONLY);
 	if (fd == NO_RESULT)
-		ft_exit_word(ERR_FILE, EXIT_FAILURE, 1);
+		ft_end(ERR_FILE, EXIT_FAILURE, 1);
 	else
 	{
-		if (sh->in[i].fd.in > 2)
-			close(sh->in[i].fd.in);
+		more_security_in(sh, i);
 		sh->in[i].fd.in = fd;
 	}
 }
 
-// '>'
+// '>' write in the fd
 void	redir_output(t_shell *sh, int i, int j)
 {
 	int	fd;
 
 	fd = open(sh->in[i].red[j].file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd == NO_RESULT)
-		ft_exit_word(ERR_FILE, EXIT_FAILURE, 1);
+		ft_end(ERR_FILE, EXIT_FAILURE, 1);
 	else
 	{
-		if (sh->in[i].fd.out > 2)
-			close(sh->in[i].fd.out);
+		more_security_out(sh, i);
 		sh->in[i].fd.out = fd;
 	}
 }
 
-// '>>'
+// '>>' ajoute a la fin du fichier sans ecraser le fichier
 void	append_in(t_shell *sh, int i, int j)
 {
 	int	fd;
 
 	fd = open(sh->in[i].red[j].file, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	if (fd == NO_RESULT)
-		ft_exit_word(ERR_FILE, EXIT_FAILURE, 1);
+		ft_end(ERR_FILE, EXIT_FAILURE, 1);
 	else
 	{
-		if (sh->in[i].fd.out > 2)
-			close(sh->in[i].fd.out);
+		more_security_out(sh, i);
 		sh->in[i].fd.out = fd;
 	}
 }
@@ -70,27 +67,24 @@ void	append_in(t_shell *sh, int i, int j)
 void	heredoc(t_shell *sh, int i, int j)
 {
 	int		fd[2];
-	char	*keyword;
-	char	*prompt;
+	char	*limiter;
+	char	*h_prompt;
 
 	if (pipe(fd) == NO_RESULT)
-		ft_exit_word(ERR_PIPE, EXIT_FAILURE, 1);
-	keyword = sh->in[i].red[j].file;
-	prompt = NULL;
+		ft_end(ERR_PIPE, EXIT_FAILURE, 1);
+	limiter = sh->in[i].red[j].file;
+	h_prompt = NULL;
 	while (1)
 	{
-		prompt = readline("> ");
-		if (!prompt)
+		h_prompt = readline("> ");
+		if (!h_prompt
+			|| ft_strncmp(h_prompt, limiter, (ft_strlen(limiter) + 1)) == 0)
 			break ;
-		if (ft_strncmp(prompt, keyword, (ft_strlen(keyword) + 1)))
-			ft_putendl_fd(prompt, fd[1]);
-		else
-			break ;
-		free(prompt);
+		ft_putendl_fd(h_prompt, fd[1]);
+		free(h_prompt);
 	}
-	free(prompt);
+	free(h_prompt);
 	close(fd[1]);
-	if (sh->in[i].fd.in > 2)
-		close(sh->in[i].fd.in);
+	more_security_in(sh, i);
 	sh->in[i].fd.in = fd[0];
 }

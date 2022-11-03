@@ -1,12 +1,12 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   b_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 12:09:39 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 14:40:41 by creyt            ###   ########.fr       */
+/*   Updated: 2022/11/01 17:38:45 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,20 @@ void	b_init(t_shell *sh, char *envp[])
 	i = 0;
 	while (envp[i] != NULL)
 		i++;
-	sh->n_env = i;
-	sh->env = malloc(sizeof(char *) * (sh->n_env + 1));
-	protect_malloc((char *)sh->env);
+	sh->nbr_env = i;
+	sh->env_cpy = malloc(sizeof(char *) * (sh->nbr_env + 1));
+	protect_malloc((char *)sh->env_cpy);
 	i = 0;
-	while (i < sh->n_env)
+	while (i < sh->nbr_env)
 	{
-		sh->env[i] = ft_strdup(envp[i]);
-		protect_malloc(sh->env[i++]);
+		sh->env_cpy[i] = ft_strdup(envp[i]);
+		protect_malloc(sh->env_cpy[i++]);
 	}
-	sh->env[i] = NULL;
+	sh->env_cpy[i] = NULL;
 }
 
 void	protect_malloc(char *s)
 {
 	if (!s)
-		exit(ft_exit_word(ERR_MALL, EXIT_FAILURE, 1));
-}
-
-void	freearray(char **m, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-		free(m[i++]);
-	free(m);
+		exit(ft_end(ERR_MALL, EXIT_FAILURE, 1));
 }

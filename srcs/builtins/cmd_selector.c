@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_selector.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:43:16 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 14:45:33 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/27 11:24:28 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cmd_selector(t_shell *sh, int i)
 {
-	if (sh->n_cmd == 1)
+	if (sh->nbr_cmd == 1)
 	{
 		sh->in[i].pid = NO_RESULT;
 		if (builtins_selector(sh, i) == NO_RESULT)

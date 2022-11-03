@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   re_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 14:13:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/25 14:11:35 by creyt            ###   ########.fr       */
+/*   Created: 2022/10/25 14:48:08 by vferraro          #+#    #+#             */
+/*   Updated: 2022/10/27 11:25:27 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	mgmnt_fd(t_shell *sh) // modifier le nom mais voir ou sont reprise et ce que ca fait
+void	run_fd(t_shell *sh)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < sh->n_cmd)
+	while (i < sh->nbr_cmd)
 	{
 		j = 0;
-		while (j < sh->in[i].n_redir)
+		while (j < sh->in[i].nbr_redir)
 		{
 			open_fd(sh, i, j);
 			j++;
@@ -48,12 +48,12 @@ void	init_fd(t_shell *sh)
 	int	fd[2];
 
 	sh->in[0].fd.in = STDIN_FILENO;
-	sh->in[sh->n_cmd - 1].fd.out = STDOUT_FILENO;
+	sh->in[sh->nbr_cmd - 1].fd.out = STDOUT_FILENO;
 	i = 0;
-	while (i < sh->n_cmd - 1)
+	while (i < sh->nbr_cmd - 1)
 	{
 		if (pipe(fd) == NO_RESULT)
-			exit (ft_exit_word(ERR_PIPE, EXIT_FAILURE, 1));
+			exit (ft_end(ERR_PIPE, EXIT_FAILURE, 1));
 		sh->in[i].fd.out = fd[1];
 		sh->in[i + 1].fd.in = fd[0];
 		i++;

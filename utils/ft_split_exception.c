@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_exception.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 12:03:36 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/20 13:41:47 by creyt            ###   ########.fr       */
+/*   Updated: 2022/11/01 17:40:51 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 /* This function returns the number of words (strings) in
 the string s */
 
-int	is_quotes(char *s, int i)
+int	ft_quotes(char *s, int i)
 {
 	int		j;
 	char	c;
@@ -56,7 +56,7 @@ static int	word_cnt(char *s, char c)
 	while (i < (int) ft_strlen(s))
 	{
 		if (s[i] == '\"' || s[i] == '\'')
-			i = is_quotes(s, i);
+			i = ft_quotes(s, i);
 		if (s[i] == c)
 			is_word = 0;
 		else if (s[i] != c && is_word == 0)
@@ -84,7 +84,7 @@ static char	*words_without_borders(char *s, char c)
 	while (w_len < (int) ft_strlen(s) && s[w_len] != c)
 	{
 		if (s[w_len] == '\"' || s[w_len] == '\'')
-			w_len = is_quotes(s, w_len);
+			w_len = ft_quotes(s, w_len);
 		if (s[w_len] != c)
 			w_len++;
 	}
@@ -114,7 +114,7 @@ static void	*new_str(char *s, char c, int w_cnt, int toggle)
 		if (s[0] != c && toggle == 0)
 			return ((char *)&s[0]);
 		else if (i > 0 && s[i - 1] != c && (s[i] == '\"' || s[i] == '\''))
-			i = is_quotes(s, i);
+			i = ft_quotes(s, i);
 		p = i - 1;
 		if ((s[i] != c && i > 0 && s[p] == c) || (w_cnt == 0 && s[i] != c))
 			return ((char *)&s[i]);

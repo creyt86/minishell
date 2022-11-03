@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:44:12 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
+/*   Updated: 2022/11/01 17:54:20 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@
 
 # define ERROR "Error\n"
 # define OPT_IGN "Option(s) ignored\n"
-# define ERR_ARG "Argument invalid in this scope\n"
 # define ERR_NO_ARG "No argument(s) provided\n"
 # define CMD_404 "command not found\n"
 # define TM_ARG "too many arguments\n"
@@ -66,7 +65,7 @@
 # define ERR_MALL "malloc error\n"
 # define ERR_RDIR "redirection error\n"
 # define ERR_PIPE "pipe error\n"
-# define ERR_FILE "file error\n"
+# define ERR_FILE "No such file or directory\n"
 # define ERR_EXE "execution error\n"
 # define ERR_TOKEN "syntax error near unexpected token\n"
 
@@ -96,20 +95,20 @@ typedef struct s_input
 {
 	pid_t	pid;
 	char	*cont;
-	int		n_elem;
+	int		nbr_elem;
 	t_elem	*elem;
 	t_redir	*red;
-	int		n_redir;
+	int		nbr_redir;
 	int		pos_red;
 	t_fd	fd;
 }	t_input;
 
 typedef struct s_shell
 {
-	char				**env;
-	int					n_env;
+	char				**env_cpy;
+	int					nbr_env;
 	char				*path;
-	int					n_cmd;
+	int					nbr_cmd;
 	t_input				*in;
 }	t_shell;
 
@@ -122,10 +121,12 @@ int		ft_new_prompt(t_shell *sh);
 void	ft_close(t_shell *sh);
 void	prompt_quotes(t_shell *sh);
 void	ft_wait(t_shell *sh, int i);
+void	checker_redir_files(t_shell *sh, int i, int j);
 
 //safe_word.c
-int		ft_exit_word(char *wd, int status, int print);
+int		ft_end(char *msg, int status, int print);
 int		msg_cmd_404(t_shell *sh, int i);
+
 //builtins.c
 int		b_pwd(t_shell *sh);
 int		b_exit(t_shell *sh, int in);
@@ -167,21 +168,21 @@ char	**parse_env(char *s);
 void	sort_env(t_shell *sh, int in);
 void	print_env(t_shell *sh, int in, char **elem);
 void	the_sorter(t_shell *sh, char *tempura, char *a, char *b);
-void	dup_array_to_env(t_shell *sh, char **array);
+void	dup_table_to_env(t_shell *sh, char **table);
 
 //b_cd.c
 int		b_cd(t_shell *sh, int in);
 int		where_in_env(t_shell *sh, char *key, int len);
 void	update_env(t_shell *sh, char *dir);
 int		print_cd(char *s, int n);
-int		no_place_like_home(t_shell *sh);
+int		find_home(t_shell *sh);
 
 //b_export.c
 int		b_export(t_shell *sh, int in);
 void	add_key(t_shell *sh, char *key, char *val);
 char	*define_val(char *key, char *val);
-void	update_arr(t_shell *sh, char **new_array, int add_key, char *new_val);
-void	update_key(t_shell *sh, char *key, char *val, char **new_array);
+void	update_arr(t_shell *sh, char **new_table, int add_key, char *new_val);
+void	update_key(t_shell *sh, char *key, char *val, char **new_table);
 
 //b_unset.c
 int		b_unset(t_shell *sh, int in);
@@ -194,7 +195,7 @@ void	print_echo_n(t_input *in, int i);
 //b_init.c
 void	b_init(t_shell *sh, char *envp[]);
 void	protect_malloc(char *s);
-void	freearray(char **m, int n);
+void	freetab(char **box, int n);
 
 //dollar.c
 void	ft_dollar(t_shell *sh, int in, int i);
@@ -215,9 +216,11 @@ void	redir_output(t_shell *sh, int i, int j);
 void	redir_input(t_shell *sh, int i, int j);
 void	append_in(t_shell *sh, int i, int j);
 void	heredoc(t_shell *sh, int i, int j);
+void	more_security_in(t_shell *sh, int i);
+void	more_security_out(t_shell *sh, int i);
 
 //redir_again.c
-void	mgmnt_fd(t_shell *sh);
+void	run_fd(t_shell *sh);
 void	open_fd(t_shell *sh, int i, int j);
 void	init_fd(t_shell *sh);
 void	reset_fd(t_fd *fdk);
@@ -227,7 +230,7 @@ void	exec_boarders(t_shell *sh, int in);
 int		exec_middle(t_shell *sh, int in, int ok, int i);
 int		on_my_way(t_shell *sh, int ok, char *cmd_path, int in);
 void	execution(t_shell *sh, int in, int i, int ok);
-int		len_array(char **array);
+int		len_tab(char **table);
 
 //signals.c
 void	sig_int(int c);
@@ -235,7 +238,7 @@ void	sig_double(int c);
 char	*ft_set_signal(void);
 
 //error.c
-int		ft_exit_word(char *msg, int status, int print);
+int		ft_end(char *msg, int status, int print);
 int		msg_cmd_404(t_shell *sh, int i);
 
 //free.c
@@ -245,7 +248,7 @@ void	free_redir(t_shell *sh, int i);
 //ft_split_exception_utils.c
 int		check_qts_split(char *s, int i, char c);
 char	**ft_split_ex(char const *s, char c);
-int		is_quotes(char *s, int i);
+int		ft_quotes(char *s, int i);
 
 //ft_strjoin_free.c
 char	*ft_strjoin_free(char const *s1, char const *s2);

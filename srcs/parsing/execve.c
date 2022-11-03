@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:36:29 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
+/*   Updated: 2022/11/01 17:39:19 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	exec_boarders(t_shell *sh, int in)
 		{
 			if (on_my_way(sh, ok, sh->in[in].elem->cont[0], in) != 1)
 			{
-				i = where_in_env(sh, "PATH", 4);
+				i = where_in_env(sh, "PATH", 5);
 				execution(sh, in, i, ok);
 			}
 		}
-		freearray(sh->env, sh->n_env);
+		freetab(sh->env_cpy, sh->nbr_env);
 		free_sh(sh);
 		exit (g_exit_stat);
 	}
@@ -43,9 +43,9 @@ int	exec_middle(t_shell *sh, int in, int ok, int i)
 	char		**tmp;
 	char		*cmd_path;
 
-	tmp = parse_env(sh->env[i]);
+	tmp = parse_env(sh->env_cpy[i]);
 	tdpp = ft_split(tmp[1], ':');
-	freearray(tmp, 2);
+	freetab(tmp, 2);
 	i = 0;
 	while (tdpp[i])
 	{
@@ -56,13 +56,13 @@ int	exec_middle(t_shell *sh, int in, int ok, int i)
 		{
 			free(cmd_path);
 			free_all(sh);
-			freearray(tdpp, len_array(tdpp));
-			exit (ft_exit_word(ERR_EXE, EXIT_FAILURE, 1));
+			freetab(tdpp, len_tab(tdpp));
+			exit (ft_end(ERR_EXE, EXIT_FAILURE, 1));
 		}
 		i++;
 		free(cmd_path);
 	}
-	freearray(tdpp, i + 1);
+	freetab(tdpp, i + 1);
 	return (ok);
 }
 
@@ -75,7 +75,7 @@ int	on_my_way(t_shell *sh, int ok, char *cmd_path, int in)
 		if (sh->in[in].fd.in > 2)
 			dup2(sh->in[in].fd.in, STDIN_FILENO);
 		ft_close(sh);
-		execve(cmd_path, sh->in[in].elem->cont, sh->env);
+		execve(cmd_path, sh->in[in].elem->cont, sh->env_cpy);
 		ok = 1;
 	}
 	return (ok);
@@ -93,12 +93,12 @@ void	execution(t_shell *sh, int in, int i, int ok)
 	}
 }
 
-int	len_array(char **array)
+int	len_tab(char **table)
 {
 	int	i;
 
 	i = 0;
-	while (array[i])
+	while (table[i])
 		i++;
 	return (i);
 }

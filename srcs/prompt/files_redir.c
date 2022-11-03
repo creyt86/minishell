@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   safe_word.c                                        :+:      :+:    :+:   */
+/*   files_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 14:25:59 by vferraro          #+#    #+#             */
-/*   Updated: 2022/10/13 14:47:57 by vferraro         ###   ########.fr       */
+/*   Created: 2022/11/01 17:47:54 by vferraro          #+#    #+#             */
+/*   Updated: 2022/11/01 17:59:28 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
-int	ft_exit_word(char *wd, int status, int print)
+void	checker_redir_files(t_shell *sh, int i, int j)
 {
-	if (!wd)
-		wd = ERROR;
-	if (status)
-		ft_putstr_fd(wd, STDERR_FILENO);
-	else if (print)
-		ft_printf(wd);
-	g_exit_stat = status;
-	return (status);
-}
+	int	quote;
+	int	redir_file;
 
-int	msg_cmd_404(t_shell *sh, int i)
-{
-	g_exit_stat = ERR_404;
-	ft_printf("%s: command not found\n", sh->in[i].elem->cont[0]);
-	return (g_exit_stat);
+	while (j < sh->in[i].nbr_elem)
+	{
+		trimquotes(sh, "\"", i, j);
+		quote = trimquotes(sh, "\'", i, j);
+		if (!quote)
+			ft_dollar(sh, i, j);
+		redir_file = checker_redir(sh, i, j);
+		if (redir_file == NO_RESULT)
+			break ;
+		else if (redir_file > 0)
+			continue ;
+		j++;
+	}
 }

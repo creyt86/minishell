@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_exit.c                                          :+:      :+:    :+:   */
+/*   to_the_end.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 13:27:10 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/25 13:40:36 by creyt            ###   ########.fr       */
+/*   Created: 2022/10/13 14:25:59 by vferraro          #+#    #+#             */
+/*   Updated: 2022/10/25 15:06:33 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_exit_word(char *msg, int status, int print)
+int	ft_end(char *msg, int status, int print)
 {
 	if (!msg)
 		msg = ERROR;
@@ -24,9 +24,9 @@ int	ft_exit_word(char *msg, int status, int print)
 	return (status);
 }
 
-int	msg_cmd_404(t_data *dt, int i)
+int	msg_cmd_404(t_shell *sh, int i)
 {
 	g_exit_stat = ERR_404;
-	ft_printf("%s: command not found\n", dt->in[i].elem->cont[0]);
+	ft_printf("%s: command not found\n", sh->in[i].elem->cont[0]);
 	return (g_exit_stat);
 }

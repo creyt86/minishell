@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_env_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creyt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: vferraro <vferraro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:10:18 by creyt             #+#    #+#             */
-/*   Updated: 2022/10/13 14:40:33 by creyt            ###   ########.fr       */
+/*   Updated: 2022/10/27 16:42:46 by vferraro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	print_env(t_shell *sh, int in, char **elem)
 	int		i;
 	char	**export;
 
-	if (sh->in[in].n_elem == 1)
+	if (sh->in[in].nbr_elem == 1)
 	{
 		i = 0;
-		while (i < sh->n_env)
+		while (i < sh->nbr_env)
 		{
 			export = parse_env(elem[i]);
 			if (export[1])
@@ -28,7 +28,7 @@ void	print_env(t_shell *sh, int in, char **elem)
 			else if (export[0])
 				ft_printf("declare -x %s\n", export[0]);
 			i++;
-			freearray(export, 2);
+			freetab(export, 2);
 		}
 	}
 }
@@ -46,12 +46,12 @@ char	**dup_env(t_shell *sh)
 	int		i;
 	char	**export;
 
-	export = malloc(sizeof(char *) * sh->n_env);
+	export = malloc(sizeof(char *) * sh->nbr_env);
 	protect_malloc((char *)export);
 	i = 0;
-	while (i < sh->n_env)
+	while (i < sh->nbr_env)
 	{
-		export[i] = ft_strdup(sh->env[i]);
+		export[i] = ft_strdup(sh->env_cpy[i]);
 		i++;
 	}
 	return (export);
@@ -66,10 +66,10 @@ void	sort_env(t_shell *sh, int in)
 
 	export = dup_env(sh);
 	i = 0;
-	while (i < sh->n_env)
+	while (i < sh->nbr_env)
 	{
 		j = i + 1;
-		while (j < sh->n_env)
+		while (j < sh->nbr_env)
 		{
 			if (ft_strncmp(export[j], export[i], MAX_PATH) < 0)
 			{
@@ -82,18 +82,18 @@ void	sort_env(t_shell *sh, int in)
 		i++;
 	}
 	print_env(sh, in, export);
-	freearray(export, sh->n_env);
+	freetab(export, sh->nbr_env);
 }
 
-void	dup_array_to_env(t_shell *sh, char **array)
+void	dup_table_to_env(t_shell *sh, char **table)
 {
 	int	i;
 
-	sh->env = malloc (sizeof(char *) * (sh->n_env + 1));
-	protect_malloc((char *)sh->env);
+	sh->env_cpy = malloc (sizeof(char *) * (sh->nbr_env + 1));
+	protect_malloc((char *)sh->env_cpy);
 	i = -1;
-	while (++i < sh->n_env)
-		sh->env[i] = array[i];
-	sh->env[i] = NULL;
-	free(array);
+	while (++i < sh->nbr_env)
+		sh->env_cpy[i] = table[i];
+	sh->env_cpy[i] = NULL;
+	free(table);
 }
